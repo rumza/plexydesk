@@ -14,13 +14,13 @@ class QDeclarativeContext;
 
 typedef QPair<QString, QString> MimeTypePair;
 
-class IconLoader : public QObject, public QDeclarativeParserStatus
+class Q_DECLARATIVE_EXPORT IconLoader : public QObject, public QDeclarativeParserStatus
 {
    Q_OBJECT
    Q_INTERFACES(QDeclarativeParserStatus)
 public:
-   IconLoader(QObject *parent=0);
-   virtual ~IconLoader();
+   IconLoader(QObject *parent = 0);
+   virtual ~IconLoader() {};
    Q_PROPERTY(QString folder READ folder WRITE setFolder);
    Q_PROPERTY(QString mimeIcon READ mimeIcon WRITE setMimeIcon);	
    QString folder();
@@ -28,8 +28,8 @@ public:
    QString mimeIcon();
    void setMimeIcon(QString &mimetype);
    Q_INVOKABLE bool isFolder(int index);
-   virtual void classBegin();
-   virtual void componentComplete();
+   virtual void classBegin(){}
+   virtual void componentComplete() {}
 private slots:
    void mimeFound(MimeTypePair pair);
 private:

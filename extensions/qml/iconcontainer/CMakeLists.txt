@@ -10,12 +10,13 @@ SET(sourceFiles
 
 SET(headerFiles
 	qdeclarativefolderlistmodel.h
-        iconloader.h
+   iconloader.h
 )
 
 SET(QTMOC_SRCS
 	qdeclarativefolderlistmodel.h
-        iconloader.h
+   iconloader.h
+   plugin.h
 )
 qt4_wrap_cpp(QT_MOC_SRCS ${QTMOC_SRCS})
 
@@ -44,7 +45,9 @@ TARGET_LINK_LIBRARIES(
 )
 
 FILE(GLOB QMLFILES *.qml)
+
 INSTALL (FILES ${QMLFILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plexyext/)
-INSTALL (TARGETS iconcontainer DESTINATION ${QT_IMPORTS_DIR})
+INSTALL (TARGETS iconcontainer DESTINATION ${QT_IMPORTS_DIR}/IconLoader/)
+INSTALL (FILES ${CMAKE_CURRENT_SOURCE_DIR}/qmldir  DESTINATION ${QT_IMPORTS_DIR}/IconLoader/)
 ADD_SUBDIRECTORY(component)
 

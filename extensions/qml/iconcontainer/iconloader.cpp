@@ -1,7 +1,7 @@
 #include "iconloader.h"
 
 
-IconLoader::IconLoader(QObject *parent)
+IconLoader::IconLoader(QObject *parent) : QObject(parent)
 {
    mime = new QPlexyMime();
 //   icp = new IconProvider();
