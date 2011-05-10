@@ -1,8 +1,5 @@
-INCLUDE (${QT_USE_FILE})
 INCLUDE_DIRECTORIES(
    ${QT_INCLUDES}
-   
-   
 )
 
 SET(sourceFiles
@@ -32,7 +29,7 @@ SET(libs
    ${PLEXY_CORE_LIBRARY}
 )
 
-add_library (iconcontainer ${sourceFiles} ${QT_MOC_SRCS})
+add_library (iconcontainer  SHARED ${sourceFiles} ${QT_MOC_SRCS})
 #IF(MINGW)
 #    SET_TARGET_PROPERTIES(desktopview PROPERTIES
 #        IMPORT_SUFFIX ".lib"
@@ -45,9 +42,9 @@ TARGET_LINK_LIBRARIES(
    iconcontainer
    ${libs}
 )
-FILE( GLOB QMLFILES *.qml)
-INSTALL (FILES ${QMLFILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plexyext/)
-INSTALL (TARGETS iconcontainer DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plexyext/)
-ADD_SUBDIRECTORY(component)
 
+FILE(GLOB QMLFILES *.qml)
+INSTALL (FILES ${QMLFILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plexyext/)
+INSTALL (TARGETS iconcontainer DESTINATION ${QT_IMPORTS_DIR})
+ADD_SUBDIRECTORY(component)
 
