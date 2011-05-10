@@ -7,20 +7,20 @@ INCLUDE_DIRECTORIES(
 
 SET(sourceFiles
    testicon.cpp
-   ${CMAKE_SOURCE_DIR}/runner/iconprovider.cpp
-   ${CMAKE_SOURCE_DIR}/runner/iconjob.cpp
+#   ${CMAKE_SOURCE_DIR}/runner/iconprovider.cpp
+#   ${CMAKE_SOURCE_DIR}/runner/iconjob.cpp
 )
 
 set(headerFiles
      testicon.h
-     ${CMAKE_SOURCE_DIR}/runner/iconprovider.h
-     ${CMAKE_SOURCE_DIR}/runner/iconjob.h
+ #    ${CMAKE_SOURCE_DIR}/runner/iconprovider.h
+ #    ${CMAKE_SOURCE_DIR}/runner/iconjob.h
 )
 
 set(QTMOC_TEST_SRCS
      testicon.h
-     ${CMAKE_SOURCE_DIR}/runner/iconprovider.h
-     ${CMAKE_SOURCE_DIR}/runner/iconjob.h
+#     ${CMAKE_SOURCE_DIR}/runner/iconprovider.h
+#     ${CMAKE_SOURCE_DIR}/runner/iconjob.h
 )
 
 qt4_wrap_cpp(QT_MOC_SRCS_TEST ${QTMOC_TEST_SRCS})

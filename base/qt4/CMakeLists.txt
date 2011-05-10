@@ -25,6 +25,8 @@ SET(sourceFiles
     plexyconfig.cpp
     pluginloader.cpp
     viewlayer.cpp
+    iconjob.cpp
+    iconprovider.cpp
 )
 
 SET(headerFiles
@@ -52,6 +54,8 @@ SET(headerFiles
    viewlayer.h
    widgetinterface.h
    widgetplugin.h
+   iconjob.h
+   iconprovider.h
 )
 
 SET(MOC_SRCS
@@ -74,6 +78,8 @@ SET(MOC_SRCS
    viewlayer.h
    widgetinterface.h
    widgetplugin.h
+   iconjob.h
+   iconprovider.h
 )
 
 #for now only dbus works only under linux

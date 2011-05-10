@@ -32,8 +32,8 @@ ENDIF(NOT APPLE)
 SET(sourceFiles
     desktopview.cpp
     icon.cpp
-    iconjob.cpp
-    iconprovider.cpp
+#    iconjob.cpp
+#    iconprovider.cpp
     plexypanel.cpp
     canvas.cpp
     ${extra_source}
@@ -43,9 +43,9 @@ SET(sourceFiles
 set(headerFiles
     desktopview.h
     icon.h
-    iconjob.h
-    iconprovider.h
     canvas.h
+#    iconjob.h
+#    iconprovider.h
     plexypanel.h
     ${extra_headers}
 )
@@ -53,8 +53,8 @@ set(headerFiles
 set(QTMOC_SRCS
     desktopview.h
     icon.h
-    iconjob.h
-    iconprovider.h
+#    iconjob.h
+#    iconprovider.h
     plexypanel.h
     canvas.h
     ${extra_headers}

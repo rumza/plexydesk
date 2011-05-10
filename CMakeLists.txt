@@ -86,7 +86,10 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_BINARY_DIR}/social/libs/service/
     ${CMAKE_BINARY_DIR}/panel/
     ${CMAKE_SOURCE_DIR}/panel/
+    ${CMAKE_SOURCE_DIR}/extensions/qml/iconcontainer/
+    ${CMAKE_BINARY_DIR}/extensions/qml/iconcontainer/
     ${QT_INCLUDE_DIR}
+	
 )
 
 ADD_SUBDIRECTORY(base/qt4/)
@@ -130,7 +133,7 @@ ADD_SUBDIRECTORY(3rdparty/libmagic)
 ADD_SUBDIRECTORY(3rdparty/mime)
 ADD_SUBDIRECTORY(3rdparty/qplexymime)
 ADD_SUBDIRECTORY(3rdparty/webitem)
-
+ADD_SUBDIRECTORY(extensions/qml/iconcontainer)
 #UI widgets for all platforms
 ADD_SUBDIRECTORY(extensions/widgets/clock)
 ADD_SUBDIRECTORY(extensions/widgets/youtubewidget/)
