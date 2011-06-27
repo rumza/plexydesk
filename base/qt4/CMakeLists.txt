@@ -17,13 +17,13 @@ SET(sourceFiles
     desktopwidget.cpp
     extensionfactory.cpp
 #    fakemime.cpp
-#    httpjobhandler.cpp
     imagecache.cpp
     netwm.cpp
     pendingjob.cpp
     plexyconfig.cpp
     pluginloader.cpp
     viewlayer.cpp
+    socialaccessmanager.cpp
 )
 
 SET(headerFiles
@@ -39,7 +39,6 @@ SET(headerFiles
    desktopwidget.h
    extensionfactory.h
 #   fakemime.h
-#   httpjobhandler.h
    imagecache.h
    netwm.h
    netwm_def.h
@@ -52,6 +51,7 @@ SET(headerFiles
    viewlayer.h
    widgetinterface.h
    widgetplugin.h
+   socialaccessmanager.h
 )
 
 SET(MOC_SRCS
@@ -73,6 +73,7 @@ SET(MOC_SRCS
    viewlayer.h
    widgetinterface.h
    widgetplugin.h
+   socialaccessmanager.h
 )
 
 #for now only dbus works only under linux

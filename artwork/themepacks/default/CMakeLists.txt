@@ -26,6 +26,9 @@ SET(PHOTOVIEWER photoviewer/photoviewer.qml)
 FILE(GLOB PHOTOVIEWER_COM photoviewer/PhotoViewerCore/*.qml)
 FILE(GLOB PHOTOVIEWER_IMG photoviewer/PhotoViewerCore/images/*.png)
 SET(PHOTOVIEWER_SCR photoviewer/PhotoViewerCore/script/script.js)
+#Facebook CMAKE entries
+SET(FACEBOOK facebook/facebook.qml)
+FILE(GLOB FACEBOOK_IMGS faceboom/images/*.png)
 
 INSTALL(FILES ${PNGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
 INSTALL(FILES ${JPEGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
@@ -52,3 +55,6 @@ INSTALL(FILES ${PHOTOVIEWER} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/the
 INSTALL(FILES ${PHOTOVIEWER_COM} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/)
 INSTALL(FILES ${PHOTOVIEWER_IMG} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/images)
 INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/script)
+
+INSTALL(FILES ${FACEBOOK} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/facebook/)
+INSTALL(FILES ${FACEBOOK_IMGS} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/facebook/images/)

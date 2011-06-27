@@ -80,10 +80,10 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}/3rdparty/webitem/
     ${CMAKE_SOURCE_DIR}/3rdparty/webitem/lib/
     ${CMAKE_BINARY_DIR}/3rdparty/webitem/lib/
-    ${CMAKE_BINARY_DIR}/social/
-    ${CMAKE_SOURCE_DIR}/social/
-    ${CMAKE_SOURCE_DIR}/social/libs/service/
-    ${CMAKE_BINARY_DIR}/social/libs/service/
+#    ${CMAKE_BINARY_DIR}/social/
+#    ${CMAKE_SOURCE_DIR}/social/
+#    ${CMAKE_SOURCE_DIR}/social/libs/service/
+#    ${CMAKE_BINARY_DIR}/social/libs/service/
     ${CMAKE_BINARY_DIR}/panel/
     ${CMAKE_SOURCE_DIR}/panel/
     ${CMAKE_SOURCE_DIR}/artwork/themepacks/default/folderview/resources/
@@ -103,8 +103,8 @@ IF (UNIX)
 #ADD_SUBDIRECTORY(plexywm)
 
 ADD_SUBDIRECTORY(panel)
-ADD_SUBDIRECTORY(social)
-ADD_SUBDIRECTORY(social/accountsmanager/)
+#ADD_SUBDIRECTORY(social)
+#ADD_SUBDIRECTORY(social/accountsmanager/)
 
 #UI widgets
 ADD_SUBDIRECTORY(extensions/widgets/cpu)
@@ -134,6 +134,7 @@ ADD_SUBDIRECTORY(3rdparty/webitem)
 
 #data plugins for all platforms
 ADD_SUBDIRECTORY(extensions/data/rest)
+ADD_SUBDIRECTORY(extensions/data/fbengine)
 #Youtube is diabled ListView is now at extensions/widgets
 #ADD_SUBDIRECTORY(extensions/data/utube)
 
@@ -143,7 +144,7 @@ ADD_SUBDIRECTORY(artwork/plexyfren_theme/default/)
 #themepacks
 ADD_SUBDIRECTORY(artwork/themepacks/default)
 ADD_SUBDIRECTORY(artwork/themepacks/default/folderview/resources)
-
+ADD_SUBDIRECTORY(artwork/themepacks/default/facebook/plugins)
 
 # Removed from building
 #ADD_SUBDIRECTORY(3rdparty/cair)

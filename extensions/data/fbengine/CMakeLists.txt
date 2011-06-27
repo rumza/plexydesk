@@ -1,0 +1,55 @@
+INCLUDE_DIRECTORIES(
+    ${QT_INCLUDES}
+    ${QT_QTOPENGL_INCLUDE_DIR}
+    ${QT_QTNETWORK_INCLUDE_DIR}
+    ${QT_QTTEST_INCLUDE_DIR}
+)
+
+SET (sourceFiles
+    facebookengine.cpp
+    facebooklib.cpp
+    fbengineinterface.cpp
+)
+
+SET(headerFiles
+    facebookengine.h
+    facebooklib.h
+    fbengineinterface.h
+)
+
+SET (QTMOC_SRCS
+    facebookengine.h
+    facebooklib.h
+    fbengineinterface.h
+)
+
+QT4_WRAP_CPP(QT_MOC_SRCS ${QTMOC_SRCS})
+
+SET(sourceFiles
+    ${sourceFiles}
+    ${headerFiles}
+)
+
+SET(libs
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTNETWORK_LIBRARY}
+)
+
+ADD_LIBRARY (fbengine SHARED ${sourceFiles} ${QT_MOC_SRCS})
+
+IF(MINGW)
+    SET_TARGET_PROPERTIES(facebookengine PROPERTIES
+        IMPORT_SUFFIX ".lib"
+        IMPORT_PREFIX ""
+        PREFIX ""
+    )
+ENDIF(MINGW)
+
+TARGET_LINK_LIBRARIES(
+    fbengine
+    ${PLEXY_CORE_LIBRARY}
+    ${libs}
+)
+
+INSTALL(TARGETS fbengine DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plexyext/)
+INSTALL(FILES fbengine.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/ext/groups/)
