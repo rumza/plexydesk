@@ -28,7 +28,7 @@ FILE(GLOB PHOTOVIEWER_IMG photoviewer/PhotoViewerCore/images/*.png)
 SET(PHOTOVIEWER_SCR photoviewer/PhotoViewerCore/script/script.js)
 #Facebook CMAKE entries
 SET(FACEBOOK facebook/facebook.qml)
-FILE(GLOB FACEBOOK_IMGS faceboom/images/*.png)
+FILE(GLOB FACEBOOK_IMGS facebook/images/*.png)
 
 INSTALL(FILES ${PNGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
 INSTALL(FILES ${JPEGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
