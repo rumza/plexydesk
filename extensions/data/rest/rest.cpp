@@ -57,7 +57,7 @@ RestData::~RestData()
 
 void RestData::pushData(QVariant &arg)
 {
-    qDebug() << Q_FUNC_INFO << arg;
+    //qDebug() << Q_FUNC_INFO << arg;
     QVariantMap param = arg.toMap();
 
     QUrl url = param["url"].toUrl();

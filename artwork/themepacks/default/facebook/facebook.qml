@@ -638,6 +638,11 @@ Rectangle {
                 target: base
                 height: 175
             }
+
+            PropertyChanges {
+                target: text_input3
+                echoMode: "Password"
+            }
         }
     ]
 }

@@ -17,12 +17,12 @@
 *  along with PlexyDesk. If not, see <http://www.gnu.org/licenses/lgpl.html>
 *******************************************************************************/
 #include "facebookengine.h"
-#include "facebooklib.h"
+
 #include <datainterface.h>
 #include <pluginloader.h>
 #include <QDebug>
 #include <QStringList>
-namespace PlexyDesk{
+
 class FacebookEngine::Private
 {
 public:
@@ -33,7 +33,7 @@ public:
 };
 FacebookEngine::FacebookEngine(QObject *parent) : d(new Private)
 {
-    d->library = new FacebookLib(parent);
+    d->library = new FacebookLib();
     connect(d->library,SIGNAL(dataReady()),this,SIGNAL(dataReady()));
 }
 void FacebookEngine::pushData(QVariant &data)
@@ -43,19 +43,26 @@ void FacebookEngine::pushData(QVariant &data)
 
 void FacebookEngine::requestService(QVariantMap service)
 {
-    QString serviceName = service["name"].toString();
-    QStringList availableServices = d->library->availableServices();
-    if(availableServices.contains(serviceName))
+    QString serviceName;
+    if(service["service"].canConvert<QString>())
     {
-        QVariant args = service["data"];
-        d->library->invokeService(serviceName,args);
-    }else
+        serviceName = service["service"].toString();
+        QStringList availableServices = d->library->availableServices();
+        if(availableServices.contains(serviceName))
+        {
+            QVariant args = service["data"];
+            d->library->invokeService(serviceName,args);
+        }else
+        {
+            qDebug()<<Q_FUNC_INFO<<"Unregistered service name ::"<<serviceName;
+        }
+    }
+    else
     {
-        qDebug()<<Q_FUNC_INFO<<"Unregistered service name ::"<<serviceName;
+        qDebug()<<Q_FUNC_INFO<<"Incompatible service name ::"<<serviceName;
     }
 }
 QVariantMap FacebookEngine::readAll()
 {
     return d->library->data();
-}
 }

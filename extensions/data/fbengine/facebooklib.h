@@ -23,25 +23,28 @@
 #include <pluginloader.h>
 #include <jsonhandler.h>
 #include <QObject>
-namespace PlexyDesk{
+
 class FacebookLib : public QObject
 {
     Q_OBJECT
 public:
 
-    FacebookLib(QObject *parent);
+    FacebookLib(QObject *parent=0);
+    //FacebookLib();
+    ~FacebookLib();
     QStringList availableServices();
     QVariantMap data();
     void invokeService(QString service,QVariant args);
 
 signals:
     void dataReady();
+private slots:
+    void networkResponse();
 private:
-    void getPublicInfomation(QString user);
+    void getPublicInformation(QString user);
     class Private;
     Private *const d;
 
 };
 
 #endif // FACEBOOKLIB_H
-}

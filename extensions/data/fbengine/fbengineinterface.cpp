@@ -30,7 +30,7 @@ PlexyDesk::DataPlugin *FbEngineInterface::instance()
     /* this is the plugin we are returning since plexy core
        or other plugins will expect this pointer
      */
-    return new PlexyDesk::FacebookEngine(this);
+    return new FacebookEngine();
 }
 
 Q_EXPORT_PLUGIN2(FbEngineInterface, FbEngineInterface)

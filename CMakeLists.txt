@@ -108,7 +108,6 @@ ADD_SUBDIRECTORY(panel)
 
 #UI widgets
 ADD_SUBDIRECTORY(extensions/widgets/cpu)
-
 #data plugins
 #////////////////////////////
 ENDIF (UNIX)
@@ -140,7 +139,6 @@ ADD_SUBDIRECTORY(extensions/data/fbengine)
 
 ADD_SUBDIRECTORY(artwork)
 ADD_SUBDIRECTORY(artwork/plexyfren_theme/default/)
-
 #themepacks
 ADD_SUBDIRECTORY(artwork/themepacks/default)
 ADD_SUBDIRECTORY(artwork/themepacks/default/folderview/resources)

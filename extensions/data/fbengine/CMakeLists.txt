@@ -38,7 +38,7 @@ SET(libs
 ADD_LIBRARY (fbengine SHARED ${sourceFiles} ${QT_MOC_SRCS})
 
 IF(MINGW)
-    SET_TARGET_PROPERTIES(facebookengine PROPERTIES
+    SET_TARGET_PROPERTIES(fbengine PROPERTIES
         IMPORT_SUFFIX ".lib"
         IMPORT_PREFIX ""
         PREFIX ""

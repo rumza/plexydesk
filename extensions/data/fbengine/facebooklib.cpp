@@ -25,19 +25,23 @@
 #include <datainterface.h>
 #include <pluginloader.h>
 
-namespace PlexyDesk{
 class FacebookLib::Private : public QObject
 {
 public:
     Private()
     {
-        connect(networkMgr,SIGNAL(dataReady()),this,SLOT(networkResponse()));
+
     }
     ~Private(){}
     PlexyDesk::DataPlugin *networkMgr;
     QVariant args;
     QVariantMap response;
 public:
+    void init()
+    {
+
+    }
+
     void requestNetwork()
     {
         if(args.isNull())
@@ -46,12 +50,6 @@ public:
     }
 signals:
     void dataReady();
-    private slots:
-    void networkResponse()
-    {
-        response = networkMgr->readAll();
-        emit dataReady();
-    }
     //TODO
     //FacebookStateManager * stateMgr;
     //FacebookCacheManager * cacheMgr;
@@ -63,29 +61,40 @@ QStringList FacebookLib::availableServices()
     return servicesRegistry;
 }
 
-
-FacebookLib::FacebookLib(QObject *parent) : d (new Private), QObject(parent)
+FacebookLib::FacebookLib(QObject *parent) : d (new Private)
 {
     d->networkMgr = (PlexyDesk::DataPlugin *)PlexyDesk::PluginLoader::getInstance()->instance("restengine");
-    connect(d,SIGNAL(dataReady()),d, SLOT(networkResponse()));
+    connect(d->networkMgr,SIGNAL(dataReady()),this,SLOT(networkResponse()));
 }
+FacebookLib::~FacebookLib()
+{
+    delete d;
+}
+
 QVariantMap FacebookLib::data()
 {
     return d->response;
 }
 
-void FacebookLib::getPublicInfomation(QString user)
+void FacebookLib::getPublicInformation(QString user)
 {
     QUrl req = QUrl("http://graph.facebook.com/"+user);
     QVariantMap argsMap;
     argsMap.insert("url",req);
-    argsMap.insert("type",0);
+    argsMap.insert("type",1);
     d->args = QVariant(argsMap);
     d->requestNetwork();
 }
 void FacebookLib::invokeService(QString service, QVariant args)
 {
     if (service == "getPublicInformation")
-        this->getPublicInfomation(args.toString());
+        this->getPublicInformation(args.toString());
 }
+
+void FacebookLib::networkResponse()
+{
+    d->response = d->networkMgr->readAll();
+    qDebug()<<Q_FUNC_INFO<<d->response;
+    Q_EMIT dataReady();
 }
+

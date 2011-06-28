@@ -200,10 +200,10 @@ void AuthWidget::onReadyRead()
 
 QString AuthWidget::tokenFromConfig() const
 {
-    PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
-    config->beginGroup("facebook_plugin");
-    QString token = config->value("access_token").toString();
-    config->endGroup();
+//    PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
+    PlexyDesk::Config::getInstance()->beginGroup("facebook_plugin");
+    QString token = PlexyDesk::Config::getInstance()->value("access_token").toString();
+    PlexyDesk::Config::getInstance()->endGroup();
     qDebug() << Q_FUNC_INFO << token;
     return token;
 }

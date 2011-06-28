@@ -22,18 +22,19 @@
 
 #include <QObject>
 #include <plexy.h>
+#include "facebooklib.h"
 #include <dataplugin.h>
 #include <QVariantMap>
 #include <QVariant>
 #include <QString>
 #include <datainterface.h>
 #include <pluginloader.h>
-namespace PlexyDesk{
+
 class FacebookEngine : public PlexyDesk::DataPlugin
 {
     Q_OBJECT
 public:
-    FacebookEngine(QObject *parent);
+    FacebookEngine(QObject *parent=0);
     QVariantMap readAll();
 signals:
     void dataReady();
@@ -48,4 +49,3 @@ private:
 };
 
 #endif // FACEBOOKENGINE_H
-}
