@@ -41,18 +41,6 @@ ClockWidget::ClockWidget(const QRectF &rect, QWidget *widget)
 
     setPath(applicationDirPath() + "/share/plexy/skins/default/clock/");
     drawClockWidget();
-    qDebug()<<Q_FUNC_INFO<<"here";
-    PlexyDesk::DataPlugin *fb = qobject_cast<PlexyDesk::DataPlugin*>(PlexyDesk::PluginLoader::getInstance()->instance("fbengine"));
-    qDebug()<<Q_FUNC_INFO<<"here";
-    if (fb){
-    QVariantMap map;
-    map["service"] = QString("getPublicInformation");
-    map["data"] = QString("varunarl");
-    QVariant args = QVariant(map);
-    qDebug()<<Q_FUNC_INFO<<map;
-    fb->pushData(args); 
-    }
-
 }
 
 void ClockWidget::setPath(QString str)
