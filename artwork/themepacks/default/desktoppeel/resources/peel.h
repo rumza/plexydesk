@@ -38,25 +38,13 @@ class PEEL_EXPORT Peel : public QObject, public QDeclarativeParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QDeclarativeParserStatus)
-    Q_PROPERTY(QString peelImage READ icon NOTIFY sourceChanged);
 
 public:
     Peel(QObject *parent = 0);
     ~Peel();
-    QString icon();
     Q_INVOKABLE void viewBack(QString str);
     virtual void classBegin(){}
     virtual void componentComplete(){}
-public slots:
-    void changeImage();
-private :
-    QString path;
-signals:
-    void beginImageChange();
-    void imageChanged();
-    void sourceChanged();
-    void endImageChange();
-
 };
 
 QML_DECLARE_TYPE(Peel)

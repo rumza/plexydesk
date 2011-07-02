@@ -29,36 +29,9 @@ using namespace PlexyDesk;
 
 Peel::Peel(QObject *parent)
 {
-    path = QDir::toNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::HomeLocation)+"/.config/plexydesk/artwork/images/");
-//    changeImage();
-//    connect(PlexyDesk::Config::getInstance(),SIGNAL(wallpaperChanged()),this,SLOT(changeImage()));
 }
 Peel::~Peel(){}
 void Peel::viewBack(QString str)
 {
     PlexyDesk::Config::getInstance()->changeLayer(str);
-}
-void Peel::changeImage()
-{
-    Q_EMIT beginImageChange();
-    QString wallpaper = QDir::toNativeSeparators(PlexyDesk::Config::getInstance()->wallpaper());
-    QString source = path + "peel-image.png";
-    QPixmap imageMap;
-    if (imageMap.load(wallpaper))
-    {
-        if(!QFile::remove(source))
-            qDebug()<<Q_FUNC_INFO<<"File not found : "<<source;
-        if(imageMap.copy(imageMap.size().width()-100,0,100,100).save(source,"PNG"))
-            Q_EMIT imageChanged();
-        else
-            qDebug()<<Q_FUNC_INFO<<"Image Save error";
-    }else{
-        qDebug()<<Q_FUNC_INFO<<"Image load error";
-    }
-    Q_EMIT endImageChange();
-}
-
-QString Peel::icon()
-{
-    return path + "peel-image.png";
 }
