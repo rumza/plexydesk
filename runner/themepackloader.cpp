@@ -87,26 +87,21 @@ QPoint ThemepackLoader::widgetPos(const QString &name)
     d->mSettings->beginGroup(name);
     int x = 0;
     int y = 0;
-    QRect screenRect = QDesktopWidget().availableGeometry();
 
     QString x_value = d->mSettings->value("x").toString();
     QString y_value = d->mSettings->value("y").toString();
+    d->mSettings->endGroup();
+    QRegExp rx("^((\\d+)(|%)\\s*(-|\\+|\\*|/)\\s*(\\d+)(|%))$||^(\\d+)(|%)$");
 
-    QRegExp rx("(\\d+)");
     rx.indexIn(x_value, 0);
-
-    qDebug() << Q_FUNC_INFO << "Parsed Value" << rx.cap(1); 
-    x = rx.cap(1).toUInt();
-    x = (screenRect.width()/100) * x;
-
+    x = parseValue(rx.capturedTexts(),true);
 
     rx.indexIn(y_value, 0);
-    y = rx.cap(1).toUInt();
-    y = (screenRect.height()/100) * y;
+    y = parseValue(rx.capturedTexts(),false);
 
     qDebug() << Q_FUNC_INFO << x << ": " << y;
 
-    d->mSettings->endGroup();
+
 
     return QPoint(x, y);
 }
@@ -138,4 +133,37 @@ PlexyDesk::DesktopWidget::State ThemepackLoader::widgetView(const QString &name)
 void ThemepackLoader::setThemeName(const QString &name)
 {
     Q_UNUSED(name);
+}
+
+int ThemepackLoader::parseValue(QStringList captured, bool calcX)
+{
+    QRect screenRect = QDesktopWidget().availableGeometry();
+    QStringList capturedTexts = captured;
+    int pValueIndex = capturedTexts.indexOf("%") - 1;
+    int parsedValue1,parsedValue2;
+    parsedValue1 = capturedTexts.at(pValueIndex).toUInt();//value 1 is always the percentage value provided
+    int position;
+    if (calcX)
+        position = (screenRect.width()/100.0)*parsedValue1;
+    else
+        position =  (screenRect.height()/100.0)*parsedValue1;
+    QRegExp rx("(-|/|\\+|\\*)");
+    int operationIndex = capturedTexts.indexOf(rx);
+    if (operationIndex != -1){
+        int val1Index = capturedTexts.indexOf(QRegExp("(\\d+)"));
+        int val2Index = capturedTexts.lastIndexOf(QRegExp("(\\d+)"));
+        if (val1Index == pValueIndex)
+            parsedValue2 = capturedTexts.at(val2Index).toUInt();
+        else if (val2Index == pValueIndex)
+            parsedValue2 = capturedTexts.at(val1Index).toUInt();
+        if (capturedTexts.at(operationIndex) == "+")
+            return position + parsedValue2;
+        else if (capturedTexts.at(operationIndex) == "-")
+            return position - parsedValue2;
+        else if (capturedTexts.at(operationIndex) == "/")
+            return position / parsedValue2;
+        else if (capturedTexts.at(operationIndex) == "*")
+            return position * parsedValue2;
+    }
+    return position;
 }

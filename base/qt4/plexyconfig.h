@@ -73,13 +73,13 @@ public:
 public Q_SLOTS:
     void setWallpaper(const QString &str);
     void addWidget(const QString &widget);
-    void changeLayer();
+    void changeLayer(const QString &layer = "");
 
 Q_SIGNALS:
     void configChanged();
     void wallpaperChanged();
     void widgetAdded();
-    void layerChange();
+    void layerChange(const QString &layer);
     void proxyChanged();
     void proxyPortChanged();
     void proxyURLChanged();

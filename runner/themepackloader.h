@@ -30,7 +30,7 @@ public slots:
 
 private:
     void scanThemepackPrefix();
-
+    int parseValue(QStringList capturedTexts, bool calcX = true);
     class ThemepackLoaderPrivate;
     ThemepackLoaderPrivate *const d;
 };

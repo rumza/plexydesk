@@ -37,6 +37,10 @@ public:
             const QString &layer = QLatin1String("Widgets"),
             const QPoint &pos = QPoint(0, 0),
             PlexyDesk::DesktopWidget::State state = PlexyDesk::DesktopWidget::DOCK);
+    void addExtension(PlexyDesk::DesktopWidget * widget,
+            const QString &layer = QLatin1String("Widgets"),
+            const QPoint &pos = QPoint(0, 0),
+            PlexyDesk::DesktopWidget::State state = PlexyDesk::DesktopWidget::DOCK);
     void addDesktopItem(QGraphicsItem *item);
     void enableOpenGL(bool);
     void showLayer(const QString &name);

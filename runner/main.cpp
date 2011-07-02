@@ -20,6 +20,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <debug.h>
+#include <QPoint>
 
 #ifdef Q_WS_X11
 #include <stdio.h>
@@ -103,13 +104,13 @@ int main( int argc, char * *argv )
     view->show();
 
     /* load all the widgets to a Widget Browser Layer */
-    Q_FOREACH(const QString &pluginName, loader->listPlugins(QLatin1String("Widget"))) {
-        qDebug() << "Lading Plugins to Hidden Browser Layer";
-        view->addExtension(pluginName, QLatin1String("Browser"));
+    Q_FOREACH(const QString &pluginName, loader->listPlugins(QLatin1String("System"))) {
+        //qDebug() << "Lading Plugins to Hidden Browser Layer";
+        view->addExtension(pluginName, QLatin1String("DesktopBack"), QPoint(0,0), PlexyDesk::DesktopWidget::NORMALSIDE);
     }
 
     view->setThemePack(PlexyDesk::Config::getInstance()->themepackName());
-    view->showLayer(QLatin1String("Widgets"));
+    view->showLayer(QLatin1String("themepack"));
 
     return app.exec();
 }

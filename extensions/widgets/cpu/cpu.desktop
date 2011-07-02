@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Plex CPU
-Type=Widget
+Type=System
 Comment=Show CPU Usage
 X-PLEXYDESK-Library=plexycpu

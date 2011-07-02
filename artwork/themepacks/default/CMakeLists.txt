@@ -26,6 +26,10 @@ SET(PHOTOVIEWER photoviewer/photoviewer.qml)
 FILE(GLOB PHOTOVIEWER_COM photoviewer/PhotoViewerCore/*.qml)
 FILE(GLOB PHOTOVIEWER_IMG photoviewer/PhotoViewerCore/images/*.png)
 SET(PHOTOVIEWER_SCR photoviewer/PhotoViewerCore/script/script.js)
+#DesktopPeeling
+SET(DESKTOPPEEL desktoppeel/desktoppeel.qml)
+FILE(GLOB DESKTOPPEEL_PNG desktoppeel/resources/images/*.png)
+FILE(GLOB DESKTOPPEEL_JPG desktoppeel/resources/images/*.jpg)
 
 INSTALL(FILES ${PNGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
 INSTALL(FILES ${JPEGFILES}  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/resources/)
@@ -52,3 +56,7 @@ INSTALL(FILES ${PHOTOVIEWER} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/the
 INSTALL(FILES ${PHOTOVIEWER_COM} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/)
 INSTALL(FILES ${PHOTOVIEWER_IMG} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/images)
 INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/photoviewer/PhotoViewerCore/script)
+
+INSTALL(FILES ${DESKTOPPEEL} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/desktoppeel/)
+INSTALL(FILES ${DESKTOPPEEL_PNG} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/desktoppeel/resources/images/)
+INSTALL(FILES ${DESKTOPPEEL_JPG} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/plexy/themepack/default/desktoppeel/resources/images/)

@@ -93,8 +93,13 @@ void ViewLayer::hideLayer()
      }
 }
 
-void ViewLayer::switchLayer()
+void ViewLayer::switchLayer(QString layer)
 {
+    if(!layer.isEmpty())
+    {
+        showLayer(layer);
+        return;
+    }
     QString newLayer;
     QString currentLayer = d->layer.key(d->currentList);
     QList<QString> keysList = d->layer.keys();

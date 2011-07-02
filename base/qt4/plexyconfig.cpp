@@ -157,10 +157,10 @@ void Config::addWidget(const QString &widget)
     writeToFile();
 }
 
-void Config::changeLayer()
+void Config::changeLayer(const QString &layer)
 {
     qDebug() << Q_FUNC_INFO;
-    Q_EMIT layerChange();
+    Q_EMIT layerChange(layer);
     Q_EMIT wallpaperChanged();
 }
 

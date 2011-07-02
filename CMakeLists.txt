@@ -143,7 +143,7 @@ ADD_SUBDIRECTORY(artwork/plexyfren_theme/default/)
 #themepacks
 ADD_SUBDIRECTORY(artwork/themepacks/default)
 ADD_SUBDIRECTORY(artwork/themepacks/default/folderview/resources)
-
+ADD_SUBDIRECTORY(artwork/themepacks/default/desktoppeel/resources)
 
 # Removed from building
 #ADD_SUBDIRECTORY(3rdparty/cair)

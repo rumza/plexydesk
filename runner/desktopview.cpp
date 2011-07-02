@@ -117,7 +117,7 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) : QGraphicsView
     d->row = d->column = 48.0;
     d->margin = 10.0;
     d->layer = QSharedPointer<ViewLayer>(new ViewLayer(this));
-    d->layer->showLayer(QLatin1String("Widgets"));
+    //d->layer->showLayer(QLatin1String("Widgets"));
 
     /* Effects */
 
@@ -126,7 +126,7 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) : QGraphicsView
 
     connect(Config::getInstance(), SIGNAL(configChanged()), this, SLOT(backgroundChanged()));
     connect(Config::getInstance(), SIGNAL(widgetAdded()), this, SLOT(onNewWidget()));
-    connect(Config::getInstance(), SIGNAL(layerChange()), d->layer.data(), SLOT(switchLayer()));
+    connect(Config::getInstance(), SIGNAL(layerChange(QString)), d->layer.data(), SLOT(switchLayer(QString)));
 
 #ifdef Q_WS_X11
     if (checkXCompositeExt()) {
@@ -199,10 +199,8 @@ void DesktopView::setThemePack(const QString &name)
             qDebug() << Q_FUNC_INFO << "Loading qml " << qmlWidget;
             DesktopWidget *parent = new DesktopWidget(QRectF(0,0,0,0));
             parent->qmlFromUrl(QUrl(d->mThemeLoader->qmlFilesFromTheme(qmlWidget)));
-            scene()->addItem(parent);
-            connect(parent, SIGNAL(close()), this, SLOT(closeDesktopWidget()));
             QPoint pos = d->mThemeLoader->widgetPos(qmlWidget);
-            parent->setPos(pos);
+            addExtension(parent,QLatin1String("themepack"),pos,d->mThemeLoader->widgetView(qmlWidget));
         }
 
     }
@@ -340,6 +338,31 @@ void DesktopView::addExtension(const QString &name,
         }
     }
    delete provider;
+}
+/*
+ * An overloaded method for adding the DesktopWidget * object directly to the desktop
+ * This is to be used when adding a custome DesktopWidget (mostly a QML application)
+ * @layername is the layer the widget is added
+ * @pos is the positions defined to place the widget
+ * @state with starting state of the widget {DOCK;NORMALSIDE;BACKSIDE}
+ */
+void DesktopView::addExtension(DesktopWidget *widget,
+        const QString &layerName,
+        const QPoint &pos,
+        PlexyDesk::DesktopWidget::State state)
+{
+    if (widget) {
+        widget->configState(state);
+        scene()->addItem(widget);
+        if (pos.x() == 0 && pos.y() == 0) {
+            widget->setPos(d->row, d->column);
+            d->row += widget->boundingRect().width()+d->margin;
+        } else {
+            widget->setPos(pos);
+        }
+        d->layer->addItem(layerName, widget);
+        connect(widget, SIGNAL(close()), this, SLOT(closeDesktopWidget()));
+    }
 }
 
 void DesktopView::addCoreExtension(const QString &name)

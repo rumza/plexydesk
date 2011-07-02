@@ -32,7 +32,7 @@ public:
     QStringList layerIndex() const;
 
 public Q_SLOTS:
-    void switchLayer();
+    void switchLayer(QString layer);
 
 private:
     class Private;
