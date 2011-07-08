@@ -36,4 +36,4 @@ TARGET_LINK_LIBRARIES(
        )
 
 INSTALL(TARGETS exampleengine DESTINATION lib/plexyext)
-INSTALL(FILES example.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES example.desktop DESTINATION share/plexydesk/ext/groups)

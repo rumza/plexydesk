@@ -49,4 +49,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS restengine DESTINATION lib/plexyext)
-INSTALL(FILES rest.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES rest.desktop DESTINATION share/plexydesk/ext/groups)

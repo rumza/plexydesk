@@ -50,4 +50,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS videoview DESTINATION lib/plexyext)
-INSTALL(FILES videoview.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES videoview.desktop DESTINATION share/plexydesk/ext/groups)

@@ -48,4 +48,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS plexyauth DESTINATION lib/plexyext)
-INSTALL(FILES authwidget.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES authwidget.desktop DESTINATION share/plexydesk/ext/groups)

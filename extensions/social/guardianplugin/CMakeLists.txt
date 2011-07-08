@@ -54,4 +54,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS guardianplugin DESTINATION lib/plexyext)
-INSTALL(FILES guardianplugin.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES guardianplugin.desktop DESTINATION share/plexydesk/ext/groups)

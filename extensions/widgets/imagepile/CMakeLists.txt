@@ -51,4 +51,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS imagepil DESTINATION lib/plexyext)
-INSTALL(FILES imagepil.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES imagepil.desktop DESTINATION share/plexydesk/ext/groups)

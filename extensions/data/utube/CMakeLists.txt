@@ -44,4 +44,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS utubeengine DESTINATION lib/plexyext)
-INSTALL(FILES utube.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES utube.desktop DESTINATION share/plexydesk/ext/groups)

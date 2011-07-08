@@ -34,4 +34,4 @@ TARGET_LINK_LIBRARIES(
         )
 
 INSTALL(TARGETS rssengine DESTINATION lib/plexyext)
-INSTALL(FILES rss.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES rss.desktop DESTINATION share/plexydesk/ext/groups)

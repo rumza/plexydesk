@@ -63,4 +63,4 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 INSTALL(TARGETS videoengine DESTINATION lib/plexyext)
-INSTALL(FILES videoengine.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES videoengine.desktop DESTINATION share/plexydesk/ext/groups)

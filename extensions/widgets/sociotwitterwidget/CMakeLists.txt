@@ -48,4 +48,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS sociotweets DESTINATION lib/plexyext)
-INSTALL(FILES sociotweets.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES sociotweets.desktop DESTINATION share/plexydesk/ext/groups)

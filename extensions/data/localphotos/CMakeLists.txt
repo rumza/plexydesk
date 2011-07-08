@@ -37,4 +37,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS localphotosengine DESTINATION lib/plexyext)
-INSTALL(FILES localphotos.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES localphotos.desktop DESTINATION share/plexydesk/ext/groups)

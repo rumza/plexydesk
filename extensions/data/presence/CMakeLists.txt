@@ -48,4 +48,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS presenceengine DESTINATION lib/plexyext)
-INSTALL(FILES presence.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES presence.desktop DESTINATION share/plexydesk/ext/groups)

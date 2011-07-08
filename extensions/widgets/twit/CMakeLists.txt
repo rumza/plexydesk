@@ -50,4 +50,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS plexytwit DESTINATION lib/plexyext)
-INSTALL(FILES twit.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES twit.desktop DESTINATION share/plexydesk/ext/groups)

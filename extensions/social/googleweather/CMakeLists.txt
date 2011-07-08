@@ -50,4 +50,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS googleweather DESTINATION lib/plexyext)
-INSTALL(FILES googleweather.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES googleweather.desktop DESTINATION share/plexydesk/ext/groups)

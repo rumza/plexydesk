@@ -44,4 +44,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS ircengine DESTINATION lib/plexyext)
-INSTALL(FILES irc.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES irc.desktop DESTINATION share/plexydesk/ext/groups)

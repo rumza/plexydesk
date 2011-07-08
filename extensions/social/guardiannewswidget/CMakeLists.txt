@@ -50,4 +50,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS guardiannews DESTINATION lib/plexyext)
-INSTALL(FILES guardiannews.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES guardiannews.desktop DESTINATION share/plexydesk/ext/groups)

@@ -39,4 +39,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS plexyfriends DESTINATION lib/plexyext)
-INSTALL(FILES friends.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES friends.desktop DESTINATION share/plexydesk/ext/groups)

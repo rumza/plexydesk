@@ -59,4 +59,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS plexyyoutube DESTINATION lib/plexyext)
-INSTALL(FILES youtube.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES youtube.desktop DESTINATION share/plexydesk/ext/groups)

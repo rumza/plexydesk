@@ -54,4 +54,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS weatherplugin DESTINATION lib/plexyext)
-INSTALL(FILES weatherplugin.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES weatherplugin.desktop DESTINATION share/plexydesk/ext/groups)

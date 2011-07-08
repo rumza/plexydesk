@@ -44,4 +44,4 @@ TARGET_LINK_LIBRARIES(
 )
 
 INSTALL(TARGETS flickerengine DESTINATION lib/plexyext)
-INSTALL(FILES flicker.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES flicker.desktop DESTINATION share/plexydesk/ext/groups)

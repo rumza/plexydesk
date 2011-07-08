@@ -69,4 +69,4 @@ TARGET_LINK_LIBRARIES(
     )
 
 INSTALL(TARGETS wallpaperchange DESTINATION lib/plexyext)
-INSTALL(FILES wallpaperchange.desktop DESTINATION share/plexy/ext/groups)
+INSTALL(FILES wallpaperchange.desktop DESTINATION share/plexydesk/ext/groups)
