@@ -35,7 +35,9 @@ FILE(GLOB PHOTOVIEWER_COM photoviewer/PhotoViewerCore/*.qml)
 FILE(GLOB PHOTOVIEWER_IMG photoviewer/PhotoViewerCore/images/*.png)
 SET(PHOTOVIEWER_SCR photoviewer/PhotoViewerCore/script/script.js)
 
-
+SET(WEBBROWSER webbrowser/webbrowser.qml)
+FILE(GLOB WEBBROWSER_COM webbrowser/content/*.qml)
+FILE(GLOB WEBBROWSER_IMGS webbrowser/content/pics/*.png)
 # *** Check files in the final QT resources folder are unique - LINUX PLATFORMS ***
 # PLEASE ADD TO $UNIQUE_RC_FILES BELOW ALL RESOURCE FILES THAT GO TO ${RESOURCES_DEST_DIR}
 IF (NOT APPLE)
@@ -50,6 +52,7 @@ IF (NOT APPLE)
                             ${WELCOMEIMGS}
                             ${PHOTOVIEWER_IMG}
                             ${PHOTO_FRAME_IMGS}
+                            ${WEBBROWSER_IMGS}
                             )
         EXECUTE_PROCESS(COMMAND ${CMAKE_SOURCE_DIR}/cmakemodules/get_duplicate_files.sh "${UNIQUE_RC_FILES}"
                         OUTPUT_VARIABLE OUT_UNIQ
@@ -89,6 +92,10 @@ INSTALL(FILES ${PHOTOVIEWER} DESTINATION share/plexy/themepack/default/photoview
 INSTALL(FILES ${PHOTOVIEWER_COM} DESTINATION share/plexy/themepack/default/photoviewer/PhotoViewerCore)
 INSTALL(FILES ${PHOTOVIEWER_IMG} DESTINATION ${RESOURCES_DEST_DIR})
 INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION share/plexy/themepack/default/photoviewer/PhotoViewerCore/script)
+
+INSTALL(FILES ${WEBBROWSER} DESTINATION share/plexy/themepack/default/webbrowser)
+INSTALL(FILES ${WEBBROWSER_COM} DESTINATION share/plexy/themepack/default/webbrowser/content)
+INSTALL(FILES ${WEBBROWSER_IMGS} DESTINATION ${RESOURCES_DEST_DIR})
 
 #wallpaper item
 FILE (GLOB WALL_QML_ITEMS backdrop/*.qml)
