@@ -514,7 +514,7 @@ bool DesktopView::checkDropped (const QString &file)
     return false;
 }
 
-void DesktopView::drawBackground(QPainter *painter, const QRectF &rect)
+void DesktopView::drawBackground(QPainter * /*painter*/, const QRectF & /*rect*/)
 {
     /*
     painter->setRenderHint(QPainter::TextAntialiasing, false);

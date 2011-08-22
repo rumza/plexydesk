@@ -18,7 +18,9 @@ public:
     {
         return NULL;
     }
-    virtual void setData(const QVariantMap &data) {}
+    virtual void setData(const QVariantMap & /*data*/)
+    {
+    }
 };
 }
 #endif
