@@ -63,34 +63,34 @@ ENDIF (NOT APPLE)
 INSTALL(FILES ${PNGFILES}  DESTINATION ${RESOURCES_DEST_DIR})
 INSTALL(FILES ${JPEGFILES}  DESTINATION ${RESOURCES_DEST_DIR})
 INSTALL(FILES ${SVGFILES}  DESTINATION ${RESOURCES_DEST_DIR})
-INSTALL(FILES ${CFG}  DESTINATION share/plexy/themepack/default)
-INSTALL(FILES ${WEATHER}  DESTINATION share/plexy/themepack/default/weather)
+INSTALL(FILES ${CFG}  DESTINATION share/plexy/themepack/dev)
+INSTALL(FILES ${WEATHER}  DESTINATION share/plexy/themepack/dev/weather)
 
-INSTALL(FILES ${PHOTO}  DESTINATION share/plexy/themepack/default/photo)
+INSTALL(FILES ${PHOTO}  DESTINATION share/plexy/themepack/dev/photo)
 INSTALL(FILES ${PHOTO_IMGS}  DESTINATION ${RESOURCES_DEST_DIR})
 
-INSTALL(FILES ${PHOTO_FRAME}  DESTINATION share/plexy/themepack/default/photoframe)
+INSTALL(FILES ${PHOTO_FRAME}  DESTINATION share/plexy/themepack/dev/photoframe)
 INSTALL(FILES ${PHOTO_FRAME_IMGS}  DESTINATION ${RESOURCES_DEST_DIR})
 
 
-INSTALL(FILES ${FOLDERVIEW} DESTINATION share/plexy/themepack/default/folderview)
-INSTALL(FILES ${FOLDERVIEW_RES_QML} DESTINATION share/plexy/themepack/default/folderview/resources)
-INSTALL(FILES ${FOLDERVIEW_RES_JS} DESTINATION share/plexy/themepack/default/folderview/resources)
+INSTALL(FILES ${FOLDERVIEW} DESTINATION share/plexy/themepack/dev/folderview)
+INSTALL(FILES ${FOLDERVIEW_RES_QML} DESTINATION share/plexy/themepack/dev/folderview/resources)
+INSTALL(FILES ${FOLDERVIEW_RES_JS} DESTINATION share/plexy/themepack/dev/folderview/resources)
 INSTALL(FILES ${FOLDERVIEW_IMGS} DESTINATION ${RESOURCES_DEST_DIR})
 
-INSTALL(FILES ${DIGITALCLOCK} DESTINATION share/plexy/themepack/default/digitalclock)
+INSTALL(FILES ${DIGITALCLOCK} DESTINATION share/plexy/themepack/dev/digitalclock)
 INSTALL(FILES ${DIGITALCLOCK_IMGS} DESTINATION ${RESOURCES_DEST_DIR})
 
-INSTALL(FILES ${WELCOMEQML} DESTINATION share/plexy/themepack/default/welcome)
-INSTALL(FILES ${WELCOMESCRIPTS} DESTINATION share/plexy/themepack/default/welcome/scripts)
+INSTALL(FILES ${WELCOMEQML} DESTINATION share/plexy/themepack/dev/welcome)
+INSTALL(FILES ${WELCOMESCRIPTS} DESTINATION share/plexy/themepack/dev/welcome/scripts)
 INSTALL(FILES ${WELCOMEIMGS} DESTINATION ${RESOURCES_DEST_DIR})
 
-INSTALL(FILES ${PHOTOVIEWER} DESTINATION share/plexy/themepack/default/photoviewer)
-INSTALL(FILES ${PHOTOVIEWER_COM} DESTINATION share/plexy/themepack/default/photoviewer/PhotoViewerCore)
+INSTALL(FILES ${PHOTOVIEWER} DESTINATION share/plexy/themepack/dev/photoviewer)
+INSTALL(FILES ${PHOTOVIEWER_COM} DESTINATION share/plexy/themepack/dev/photoviewer/PhotoViewerCore)
 INSTALL(FILES ${PHOTOVIEWER_IMG} DESTINATION ${RESOURCES_DEST_DIR})
-INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION share/plexy/themepack/default/photoviewer/PhotoViewerCore/script)
+INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION share/plexy/themepack/dev/photoviewer/PhotoViewerCore/script)
 
 #wallpaper item
 FILE (GLOB WALL_QML_ITEMS backdrop/*.qml)
 
-INSTALL(FILES ${WALL_QML_ITEMS} DESTINATION share/plexy/themepack/default/backdrop)
+INSTALL(FILES ${WALL_QML_ITEMS} DESTINATION share/plexy/themepack/dev/backdrop)
