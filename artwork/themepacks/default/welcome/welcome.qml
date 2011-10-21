@@ -179,7 +179,7 @@ Image {
 
     Image {
         id: background_content
-        source: "image://plexydesk_svgprovider/bakground#center"
+        source: "image://plexydesk_svgprovider/background#center"
         anchors.top: background.top
         anchors.topMargin: 20
         anchors.left: background.left
@@ -237,8 +237,8 @@ Image {
         anchors.topMargin: 20
         anchors.bottom: background_content.bottom
         anchors.bottomMargin: 10
-        anchors.horizontalCenter: background_content.horizontalCenter
-        width: background_content.width - 20
+        anchors.horizontalCenter: rectangle1.horizontalCenter
+        width: rectangle1.width - 20
         color: "#00000000"
         opacity: 1.0
 
