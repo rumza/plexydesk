@@ -55,7 +55,6 @@ Rectangle {
         smooth: true
     }
 
-
     Image {
         id: background_topleft
         sourceSize.width: 10
@@ -86,7 +85,7 @@ Rectangle {
         smooth: true
     }
 
-  Image {
+    Image {
         id: background_top
         sourceSize.width: 10
         sourceSize.height: 10
@@ -101,7 +100,7 @@ Rectangle {
         smooth: true
     }
 
-  Image {
+    Image {
         id: background_right
         sourceSize.width: 10
         sourceSize.height: 10
@@ -116,7 +115,7 @@ Rectangle {
         smooth: true
     }
 
-Image {
+    Image {
         id: background_bottomright
         sourceSize.width: 10
         sourceSize.height: 10
@@ -131,7 +130,7 @@ Image {
         smooth: true
     }
 
-Image {
+    Image {
         id: background_bottom
         sourceSize.width: 10
         sourceSize.height: 10
@@ -146,7 +145,7 @@ Image {
         smooth: true
     }
 
-Image {
+    Image {
         id: background_bottomleft
         sourceSize.width: 10
         sourceSize.height: 10
@@ -161,7 +160,7 @@ Image {
         smooth: true
     }
 
-Image {
+    Image {
         id: background_left
         sourceSize.width: 10
         sourceSize.height: 10
@@ -175,7 +174,6 @@ Image {
         opacity: 1
         smooth: true
     }
-
 
     Image {
         id: background_content
@@ -566,7 +564,7 @@ Image {
             text: "info_desc"
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             /* Not yet supported? */
-            horizontalAlignment: Text.AlignJustify
+            //horizontalAlignment: Text.AlignJustify
             font.pixelSize: 12
             opacity: 0
             smooth: true
