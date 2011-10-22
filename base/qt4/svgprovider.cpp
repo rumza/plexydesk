@@ -104,7 +104,7 @@ void SvgProvider::addToCached(QString &imgfile, QString &filename, QString &them
 
 QPixmap SvgProvider::get(const QString &name, const QSize &size)
 {
-    QStringList itemList = name.split('#');
+    QStringList itemList = name.split("_-");
     QPixmap rv (size);
     qDebug() << Q_FUNC_INFO << itemList;
 
