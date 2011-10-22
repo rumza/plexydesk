@@ -33,7 +33,7 @@ Rectangle {
         id: background
         sourceSize.width: parent.width - 20
         sourceSize.height: parent.height - 20
-        source: "image://plexydesk_svgprovider/background#center"
+        source: "image://plexydesk_svgprovider/background_-center"
         x : 10
         y : 10
         z: -100
@@ -46,7 +46,7 @@ Rectangle {
         id: background_center
         sourceSize.width: parent.width - 20
         sourceSize.height: parent.height - 20
-        source: "image://plexydesk_svgprovider/background#center"
+        source: "image://plexydesk_svgprovider/background_-center"
         x : 10
         y : 10
         z: -100
@@ -61,7 +61,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : 10
-        source: "image://plexydesk_svgprovider/background#topleft"
+        source: "image://plexydesk_svgprovider/background_-topleft"
         x: 0
         y: 0
         z: -101
@@ -76,7 +76,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : 10
-        source: "image://plexydesk_svgprovider/background#topright"
+        source: "image://plexydesk_svgprovider/background_-topright"
         x: parent.width - 10
         y: 0
         z: -101
@@ -91,7 +91,7 @@ Rectangle {
         sourceSize.height: 10
         width : parent.width - 20
         height : 10
-        source: "image://plexydesk_svgprovider/background#top"
+        source: "image://plexydesk_svgprovider/background_-top"
         x: 10
         y: 0
         z: -101
@@ -106,7 +106,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : parent.height - 20
-        source: "image://plexydesk_svgprovider/background#right"
+        source: "image://plexydesk_svgprovider/background_-right"
         x: parent.width - 10
         y: 10
         z: -101
@@ -121,7 +121,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : 10
-        source: "image://plexydesk_svgprovider/background#bottomright"
+        source: "image://plexydesk_svgprovider/background_-bottomright"
         x: parent.width - 10
         y: parent.height - 10
         z: -101
@@ -136,7 +136,7 @@ Rectangle {
         sourceSize.height: 10
         width : parent.width - 20
         height : 10
-        source: "image://plexydesk_svgprovider/background#bottom"
+        source: "image://plexydesk_svgprovider/background_-bottom"
         x: 10
         y: parent.height - 10
         z: -101
@@ -151,7 +151,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : 10
-        source: "image://plexydesk_svgprovider/background#bottomleft"
+        source: "image://plexydesk_svgprovider/background_-bottomleft"
         x: 0
         y: parent.height - 10
         z: -101
@@ -166,7 +166,7 @@ Rectangle {
         sourceSize.height: 10
         width : 10
         height : parent.height - 20
-        source: "image://plexydesk_svgprovider/background#left"
+        source: "image://plexydesk_svgprovider/background_-left"
         x: 0
         y: 10
         z: -101
@@ -177,14 +177,12 @@ Rectangle {
 
     Image {
         id: background_content
-        source: "image://plexydesk_svgprovider/background#center"
+        source: "image://plexydesk_svgprovider/background_-center"
         anchors.top: background.top
-        anchors.topMargin: 20
         anchors.left: background.left
-        anchors.leftMargin: 20
         z: -90
-        width: background.width - (2*20)
-        height: background.height - (2*20)
+        width: parent.width - 20
+        height: parent.height - 20
         sourceSize.width: 400
         sourceSize.height : 400
         opacity: 0.8
