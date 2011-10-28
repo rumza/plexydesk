@@ -22,180 +22,21 @@ import Qt 4.7
 import PlexyDesk.FolderListModel 1.0
 import "resources"
 import "resources/Scripts.js" as Scripts
-
+import "../resources/components"
 
 Rectangle{
     id:backgroundHolder
     width: 500
     height: 400
-    color: "#00000000"
+    color: "transparent"
     focus : false
     opacity: 1.0
 
-    Image {
-        id: background
-        sourceSize.width: parent.width - 20
-        sourceSize.height: parent.height - 20
-        source: "image://plexydesk_svgprovider/background_-center"
-        x : 10
-        y : 10
-        z: -100
-        asynchronous : true
-        opacity: 0.35
-        smooth: true
+    QmlBackground
+    {
+       height: parent.height
+       width: parent.width
     }
-
-    Image {
-        id: background_center
-        sourceSize.width: parent.width - 20
-        sourceSize.height: parent.height - 20
-        source: "image://plexydesk_svgprovider/background_-center"
-        x : 10
-        y : 10
-        z: -100
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-
-    Image {
-        id: background_topleft
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-topleft"
-        x: 0
-        y: 0
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-    Image {
-        id: background_topright
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-topright"
-        x: parent.width - 10
-        y: 0
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-  Image {
-        id: background_top
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : parent.width - 20
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-top"
-        x: 10
-        y: 0
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-  Image {
-        id: background_right
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : parent.height - 20
-        source: "image://plexydesk_svgprovider/background_-right"
-        x: parent.width - 10
-        y: 10
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-Image {
-        id: background_bottomright
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-bottomright"
-        x: parent.width - 10
-        y: parent.height - 10
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-Image {
-        id: background_bottom
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : parent.width - 20
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-bottom"
-        x: 10
-        y: parent.height - 10
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-Image {
-        id: background_bottomleft
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : 10
-        source: "image://plexydesk_svgprovider/background_-bottomleft"
-        x: 0
-        y: parent.height - 10
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-Image {
-        id: background_left
-        sourceSize.width: 10
-        sourceSize.height: 10
-        width : 10
-        height : parent.height - 20
-        source: "image://plexydesk_svgprovider/background_-left"
-        x: 0
-        y: 10
-        z: -101
-        asynchronous : true
-        opacity: 1
-        smooth: true
-    }
-
-
-    Image {
-        id: background_content
-        source: "image://plexydesk_svgprovider/background_-center"
-        anchors.top: background.top
-        anchors.left: background.left
-        z: -90
-        width: parent.width - 20
-        height: parent.height - 20
-        sourceSize.width: 400
-        sourceSize.height : 400
-        opacity: 0.8
-        asynchronous : true
-        smooth: true
-    }
-
-
 
     Image {
         id: background_folderview_content

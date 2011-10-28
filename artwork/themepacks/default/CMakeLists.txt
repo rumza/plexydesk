@@ -35,6 +35,8 @@ FILE(GLOB PHOTOVIEWER_COM photoviewer/PhotoViewerCore/*.qml)
 FILE(GLOB PHOTOVIEWER_IMG photoviewer/PhotoViewerCore/images/*.png)
 SET(PHOTOVIEWER_SCR photoviewer/PhotoViewerCore/script/script.js)
 
+#common components
+FILE(GLOB COMPONENTS resources/components/*.qml)
 
 # *** Check files in the final QT resources folder are unique - LINUX PLATFORMS ***
 # PLEASE ADD TO $UNIQUE_RC_FILES BELOW ALL RESOURCE FILES THAT GO TO ${RESOURCES_DEST_DIR}
@@ -50,6 +52,7 @@ IF (NOT APPLE)
                             ${WELCOMEIMGS}
                             ${PHOTOVIEWER_IMG}
                             ${PHOTO_FRAME_IMGS}
+			    ${COMPONENTS}
                             )
         EXECUTE_PROCESS(COMMAND ${CMAKE_SOURCE_DIR}/cmakemodules/get_duplicate_files.sh "${UNIQUE_RC_FILES}"
                         OUTPUT_VARIABLE OUT_UNIQ
@@ -94,3 +97,4 @@ INSTALL(FILES ${PHOTOVIEWER_SCR} DESTINATION share/plexy/themepack/default/photo
 FILE (GLOB WALL_QML_ITEMS backdrop/*.qml)
 
 INSTALL(FILES ${WALL_QML_ITEMS} DESTINATION share/plexy/themepack/default/backdrop)
+INSTALL(FILES ${COMPONENTS} DESTINATION share/plexy/themepack/default/resources/components)
