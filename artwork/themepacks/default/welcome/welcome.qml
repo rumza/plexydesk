@@ -28,7 +28,7 @@ Rectangle {
     height: 220
     color: "transparent"
 
-    QmlBackground
+    SvgBackground
     {
        height: parent.height
        width: parent.width

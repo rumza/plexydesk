@@ -32,7 +32,7 @@ Rectangle{
     focus : false
     opacity: 1.0
 
-    QmlBackground
+    SvgBackground
     {
        height: parent.height
        width: parent.width
