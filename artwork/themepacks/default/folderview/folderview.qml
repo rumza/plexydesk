@@ -188,7 +188,7 @@ Rectangle{
                     button_back.width = button_back.width - 2
                     button_back.height = button_back.height - 2
                     }
-            onClicked: Scripts.goUp(flm,backgroundHolder,background,folderview_content,currentDir,button_back)
+            onClicked: Scripts.goUp(flm,backgroundHolder,folderview_content,currentDir,button_back)
         }
     }
 }
