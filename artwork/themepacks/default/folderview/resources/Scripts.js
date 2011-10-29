@@ -21,12 +21,12 @@
 .pragma library
 
 
-function goUp(flm,backHold,back,rec1,ct,bb)
+function goUp(flm,backHold,rec1,ct,bb)
 {
     var _folder = flm.parentFolder.toString().replace(/^.*\/\.\.$/, "file:");
     if(_folder == "") return;
     flm.folder = _folder;
-    setOpacityBug(backHold,back,rec1,ct,bb);
+    setOpacityBug(backHold,rec1,ct,bb);
 }
 
 function goInto(to,flm,ic)
@@ -76,18 +76,17 @@ function setImageViewer(ic,iv,imt,path,type,name)
     imt.text = name;
 }
 
-function setOpacityBug(backHold,back,rec1,ct,bb)
+function setOpacityBug(backHold,rec1,ct,bb)
 {
     backHold.state = "";
     rec1.opacity = 1;
     ct.opacity = 1;
     bb.opacity = 1;
-    setZIndexes(back,ct,bb);
+    setZIndexes(ct,bb);
 }
 
-function setZIndexes(back,ct,bb)
+function setZIndexes(ct,bb)
 {
-    back.z = -100;
     ct.z = 50;
     bb.z = 50;
 }
