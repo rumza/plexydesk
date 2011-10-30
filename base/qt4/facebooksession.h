@@ -2,6 +2,9 @@
 #define FACEBOOKSESSION_H
 
 #include <QObject>
+#include <QHash>
+#include<QVariant>
+#include <plexy.h>
 
 /**
   Lightweight Class for Handling Facebook Session data
@@ -16,6 +19,7 @@ public:
     QString token() const;
     void makeRequest(const QString &url);
     QByteArray rawData() const;
+    QHash<QString,QVariant> parsedData() const;
 
 Q_SIGNALS:
     void ready();

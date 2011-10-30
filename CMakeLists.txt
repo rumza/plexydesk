@@ -176,8 +176,10 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_BINARY_DIR}/runner
     ${CMAKE_SOURCE_DIR}/modules/libplexyirc
     ${CMAKE_BINARY_DIR}/modules/libplexyirc
-    ${CMAKE_SOURCE_DIR}/modules/fbjson
-    ${CMAKE_BINARY_DIR}/modules/fbjson
+    #${CMAKE_SOURCE_DIR}/modules/fbjson
+    #${CMAKE_BINARY_DIR}/modules/fbjson
+    ${CMAKE_SOURCE_DIR}/modules/friendsplugin
+    ${CMAKE_BINARY_DIR}/modules/friendsplugin
     ${CMAKE_SOURCE_DIR}/3rdparty/mime
     ${CMAKE_BINARY_DIR}/3rdparty/mime
     ${CMAKE_SOURCE_DIR}/3rdparty/qplexymime
@@ -226,6 +228,7 @@ ENDIF(WIN32)
 ADD_SUBDIRECTORY(3rdparty/mime)
 ADD_SUBDIRECTORY(3rdparty/qplexymime)
 ADD_SUBDIRECTORY(3rdparty/qt/folderlistmodel)
+ADD_SUBDIRECTORY(modules/friendsplugin)
 ADD_SUBDIRECTORY(3rdparty/webitem)
 ADD_SUBDIRECTORY(base/qt4)
 ADD_SUBDIRECTORY(extensions/widgets/clock)
@@ -234,7 +237,7 @@ ADD_SUBDIRECTORY(extensions/widgets/folderwidget)
 ADD_SUBDIRECTORY(extensions/facebook/authwin)
 ADD_SUBDIRECTORY(extensions/backdrop/classicdrop)
 ADD_SUBDIRECTORY(runner)
-ADD_SUBDIRECTORY(modules/fbjson)
+#ADD_SUBDIRECTORY(modules/fbjson)
 
 # *** UI widgets - ALL PLATFORMS ***
 # Youtube is diabled ListView is now at extensions/widgets

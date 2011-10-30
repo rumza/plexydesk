@@ -18,7 +18,9 @@ SET(sourceFiles
     shaders/shadereffectitem.cpp
     shaders/shadereffectsource.cpp
     shaders/scenegraph/qsggeometry.cpp
-
+    socialdata.cpp
+    facebooksession.cpp
+    jsonhandler.cpp
     )
 
 SET(headerFiles
@@ -43,6 +45,10 @@ SET(headerFiles
     pluginloader.h
     socialinterface.h
     socialplugin.h
+    socialdata.h
+    facebooksession.h
+    jsonhandler.h
+    json_global.h
     themepackloader.h
     viewlayer.h
     widgetinterface.h
@@ -68,6 +74,10 @@ SET(MOC_SRCS
    pluginloader.h
    socialinterface.h
    socialplugin.h
+   socialdata.h
+   facebooksession.h
+    jsonhandler.h
+    json_global.h
    themepackloader.h
    viewlayer.h
    widgetinterface.h

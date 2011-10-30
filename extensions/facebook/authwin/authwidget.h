@@ -27,6 +27,7 @@
 #include <QNetworkCookieJar>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <socialdata.h>
 
 class QTimer;
 namespace PlexyDesk {
@@ -51,7 +52,9 @@ public Q_SLOTS:
     void onUrlChanged(const QUrl &url);
     void onReadyRead();
 private:
+    void readFriends();
     QString tokenFromConfig() const;
+    SocialData * socialdata;
     QWebViewItem *mView;
     int mProgressValue;
     QNetworkAccessManager *mNtManager;

@@ -31,182 +31,190 @@
 #include "facebookdata.h"
 #include "authwidget.h"
 
-namespace PlexyDesk {
-
-AuthWidget::AuthWidget(const QRectF &rect, QWidget *widget) :
-    PlexyDesk::DesktopWidget(rect, widget)
+namespace PlexyDesk
 {
-    mJsonHandle = new JsonHandler();
-    const QString token = tokenFromConfig();
-    mLoggedIn = false;
-    mNtManager = new QNetworkAccessManager(this);
-    mCookie = new QNetworkCookieJar(this);
-    mNtManager->setCookieJar(mCookie);
-    QRect webrect = QRect(10.0, 10.0, rect.width()-65, rect.height()-5);
-    mView = new QWebViewItem(webrect, this);
-    if (mView->page()) {
-        mView->page()->setNetworkAccessManager(mNtManager);
-    }
-    connect(mView, SIGNAL(loadFinished(bool)), this, SLOT(onLoadeFinished(bool)));
-    connect(mView, SIGNAL(loadProgress(int)), this, SLOT(onLoadProgress(int)));
-    connect(mView, SIGNAL(loadStarted()), this, SLOT(onLoadStarted()));
-    connect(mView, SIGNAL(urlChanged(const QUrl &)), this, SLOT(onUrlChanged(const QUrl &)));
-    if (token.isEmpty()) {
-        mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
-                     "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
-                     "/login_success.html&type=user_agent&display=popup&scope=manage_pages,read_stream&response_type=token")));
-    } else {
-        this->configState(DesktopWidget::DOCK);
-        this->setVisible(false);
-        QNetworkRequest request;
-        request.setUrl(QUrl("https://graph.facebook.com/19292868552_118464504835613?access_token="+token));
-        mReply = mNtManager->get(request);
-        connect(mReply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-    }
-    mProgressValue = 10;
-}
 
-AuthWidget::~AuthWidget()
-{
-    delete mJsonHandle;
-}
+   AuthWidget::AuthWidget(const QRectF &rect, QWidget *widget) :
+       PlexyDesk::DesktopWidget(rect, widget)
+   {
+       mJsonHandle = new JsonHandler();
+       const QString token = tokenFromConfig();
+       mLoggedIn = false;
+       mNtManager = new QNetworkAccessManager(this);
+       mCookie = new QNetworkCookieJar(this);
+       mNtManager->setCookieJar(mCookie);
+       QRect webrect = QRect(10.0, 10.0, rect.width()-65, rect.height()-5);
+       mView = new QWebViewItem(webrect, this);
+       if (mView->page()) {
+           mView->page()->setNetworkAccessManager(mNtManager);
+       }
+       connect(mView, SIGNAL(loadFinished(bool)), this, SLOT(onLoadeFinished(bool)));
+       connect(mView, SIGNAL(loadProgress(int)), this, SLOT(onLoadProgress(int)));
+       connect(mView, SIGNAL(loadStarted()), this, SLOT(onLoadStarted()));
+       connect(mView, SIGNAL(urlChanged(const QUrl &)), this, SLOT(onUrlChanged(const QUrl &)));
+       if (token.isEmpty()) {
+           mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
+                        "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
+                        "/login_success.html&type=user_agent&display=popup&scope=manage_pages,read_stream&response_type=token")));
+       }else {
+         this->configState(DesktopWidget::DOCK);
+         this->setVisible(false);
+         this->readFriends();
+       }
+       mProgressValue = 10;
+       socialdata = SocialData::getInstance();
+   }
 
-void AuthWidget::paintExtFace(QPainter *painter,
-     const QStyleOptionGraphicsItem *op, QWidget *)
-{
-    QRect bannerRect(op->exposedRect.x(),
-         op->exposedRect.y(),
-         op->exposedRect.width(),
-         36);
-    painter->fillRect(op->exposedRect, QColor(255, 255, 255));
-    painter->fillRect(bannerRect, QColor(109, 132, 180));
-    /* Painter settings */
-    painter->setRenderHint(QPainter::Antialiasing, true);
-    painter->setRenderHint(QPainter::TextAntialiasing, true);
-    painter->setRenderHint(QPainter::HighQualityAntialiasing, true);
+   AuthWidget::~AuthWidget()
+   {
+       delete mJsonHandle;
+   }
 
-    /* progress bar */
-    QRadialGradient gradient(50, 50, 50, 50, 50);
-    gradient.setColorAt(0, QColor::fromRgbF(0, 1, 0, 1));
-    gradient.setColorAt(1, QColor::fromRgbF(0, 0, 1, 1));
-    const QBrush brush(gradient);
-    QPen pen;
-    pen.setStyle(Qt::SolidLine);
-    pen.setWidth(4);
-    pen.setBrush(QColor(157, 172, 241));
-    pen.setCapStyle(Qt::RoundCap);
-    pen.setJoinStyle(Qt::RoundJoin);
+   void AuthWidget::paintExtFace(QPainter *painter,
+        const QStyleOptionGraphicsItem *op, QWidget *)
+   {
+       QRect bannerRect(op->exposedRect.x(),
+            op->exposedRect.y(),
+            op->exposedRect.width(),
+            36);
+       painter->fillRect(op->exposedRect, QColor(255, 255, 255));
+       painter->fillRect(bannerRect, QColor(109, 132, 180));
+       /* Painter settings */
+       painter->setRenderHint(QPainter::Antialiasing, true);
+       painter->setRenderHint(QPainter::TextAntialiasing, true);
+       painter->setRenderHint(QPainter::HighQualityAntialiasing, true);
 
-    int pfWidth = boundingRect().width() - 60;
-    int pfHeight = 20;
-    QRect progressFrame (boundingRect().x() + 10,
-         38, mProgressValue * 2, pfHeight);
-    painter->setPen(pen);
-    QPoint start (progressFrame.x() + 2, progressFrame.y() + 10);
-    QPoint end ((mProgressValue * 2) + 2, progressFrame.y() + 10);
+       /* progress bar */
+       QRadialGradient gradient(50, 50, 50, 50, 50);
+       gradient.setColorAt(0, QColor::fromRgbF(0, 1, 0, 1));
+       gradient.setColorAt(1, QColor::fromRgbF(0, 0, 1, 1));
+       const QBrush brush(gradient);
+       QPen pen;
+       pen.setStyle(Qt::SolidLine);
+       pen.setWidth(4);
+       pen.setBrush(QColor(157, 172, 241));
+       pen.setCapStyle(Qt::RoundCap);
+       pen.setJoinStyle(Qt::RoundJoin);
 
-    /* Facebook Text */
-    if (not mLoggedIn) {
-        QPoint start (progressFrame.x() + 2, progressFrame.y() + 10);
-        QPoint end ((mProgressValue * 2) + 2, progressFrame.y() + 10);
-        painter->drawLine(start, end);
-        pen.setBrush(QColor(255, 255, 255));
-        painter->setPen(pen);
-        QRect txtFrame(progressFrame.x(), 10, op->exposedRect.width(), 40);
-        painter->drawText(txtFrame,
-             QString("Loading Facebook : %1%").arg(mProgressValue));
-    }
-}
-void AuthWidget::paintExtDockFace(QPainter *painter,
-     const QStyleOptionGraphicsItem *, QWidget *)
-{
-    mView->setVisible(false);
-}
+       int pfWidth = boundingRect().width() - 60;
+       int pfHeight = 20;
+       QRect progressFrame (boundingRect().x() + 10,
+            38, mProgressValue * 2, pfHeight);
+       painter->setPen(pen);
+       QPoint start (progressFrame.x() + 2, progressFrame.y() + 10);
+       QPoint end ((mProgressValue * 2) + 2, progressFrame.y() + 10);
 
-void AuthWidget::onDataReady()
-{
-}
+       /* Facebook Text */
+       if (not mLoggedIn) {
+           QPoint start (progressFrame.x() + 2, progressFrame.y() + 10);
+           QPoint end ((mProgressValue * 2) + 2, progressFrame.y() + 10);
+           painter->drawLine(start, end);
+           pen.setBrush(QColor(255, 255, 255));
+           painter->setPen(pen);
+           QRect txtFrame(progressFrame.x(), 10, op->exposedRect.width(), 40);
+           painter->drawText(txtFrame,
+                QString("Loading Facebook : %1%").arg(mProgressValue));
+       }
+   }
+   void AuthWidget::paintExtDockFace(QPainter *painter,
+        const QStyleOptionGraphicsItem *, QWidget *)
+   {
+       mView->setVisible(false);
+   }
 
-void AuthWidget::onLoadeFinished(bool ok)
-{
-    if (ok) {
-        mView->setVisible(true);
-        update();
-    } else {
-        mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
-                     "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
-                     "/login_success.html&type=user_agent&display=popup")));
-        mLoggedIn = false;
-        update();
-        mView->setVisible(true);
-    }
-    mProgressValue = 10;
-}
+   void AuthWidget::onDataReady()
+   {
+   }
 
-void AuthWidget::onLoadProgress(int progress)
-{
-    qDebug() << Q_FUNC_INFO << progress;
-    mProgressValue = progress;
-    update();
-}
+   void AuthWidget::onLoadeFinished(bool ok)
+   {
+       if (ok) {
+           mView->setVisible(true);
+           update();
+       } else {
+           mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
+                        "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
+                        "/login_success.html&type=user_agent&display=popup")));
+           mLoggedIn = false;
+           update();
+           mView->setVisible(true);
+       }
+       mProgressValue = 10;
+   }
 
-void AuthWidget::onLoadStarted()
-{
-    if (mView->isVisible()) {
-        mView->setVisible(false);
-    }
-}
+   void AuthWidget::onLoadProgress(int progress)
+   {
+       qDebug() << Q_FUNC_INFO << progress;
+       mProgressValue = progress;
+       update();
+   }
 
-void AuthWidget::onUrlChanged(const QUrl &url)
-{
-    qDebug() << Q_FUNC_INFO << url;
-    QString stringUrl = url.toString().replace("#", "?");
-    QUrl fburl(stringUrl);
-    qDebug() <<  fburl.queryItemValue("access_token");
-    if (not fburl.queryItemValue("access_token").isEmpty()) {
-        configState(DesktopWidget::DOCK);
-        this->setVisible(false);
-        /* save the auth token */
-        PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
-        QSettings *settings = config->coreSettings();
-        settings->beginGroup("facebook_plugin");
-        settings->setValue("access_token",
-             fburl.queryItemValue("access_token"));
-        settings->endGroup();
-    }
-}
-void AuthWidget::readConfig(QString &user,
-     QString &pass)
-{
-}
+   void AuthWidget::onLoadStarted()
+   {
+       if (mView->isVisible()) {
+           mView->setVisible(false);
+       }
+   }
 
-void AuthWidget::data(QVariantMap &data)
-{
-    qDebug() << Q_FUNC_INFO << data["data"];
-}
+   void AuthWidget::onUrlChanged(const QUrl &url)
+   {
+       qDebug() << Q_FUNC_INFO << url;
+       QString stringUrl = url.toString().replace("#", "?");
+       QUrl fburl(stringUrl);
+       qDebug() <<  fburl.queryItemValue("access_token");
+       if (not fburl.queryItemValue("access_token").isEmpty()) {
+           configState(DesktopWidget::DOCK);
+           this->setVisible(false);
+           this->readFriends();
+           /* save the auth token */
+           PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
+           QSettings *settings = config->coreSettings();
+           settings->beginGroup("facebook_plugin");
+           settings->setValue("access_token",
+                fburl.queryItemValue("access_token"));
+           settings->endGroup();
+       }
+   }
+   void AuthWidget::readConfig(QString &user,
+        QString &pass)
+   {
+   }
 
-void AuthWidget::onReadyRead()
-{
-    JsonData result = mJsonHandle->property(mReply->readAll(), "data");
-    if (result.type() == JsonData::Error) {
-        this->setVisible(true);
-        configState(DesktopWidget::NORMALSIDE);
-        mView->setVisible(false);
-        mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
-                     "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
-                     "/login_success.html&type=user_agent&display=popup")));
+   void AuthWidget::data(QVariantMap &data)
+   {
+       qDebug() << Q_FUNC_INFO << data["data"];
+   }
 
-    }
-}
+   void AuthWidget::onReadyRead()
+   {
+       JsonData result = mJsonHandle->property(mReply->readAll(), "data");
+       socialdata->setData(result.data());
+       if (result.type() == JsonData::Error) {
+           this->setVisible(true);
+           configState(DesktopWidget::NORMALSIDE);
+           mView->setVisible(true);
+           mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
+                        "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
+                        "/login_success.html&type=user_agent&display=popup")));
 
-QString AuthWidget::tokenFromConfig() const
-{
-    PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
-    QSettings *settings = config->coreSettings();;
-    settings->beginGroup("facebook_plugin");
-    QString token = settings->value("access_token").toString();
-    settings->endGroup();
-    qDebug() << Q_FUNC_INFO << token;
-    return token;
-}
+       }
+   }
+
+   QString AuthWidget::tokenFromConfig() const
+   {
+       PlexyDesk::Config *config = PlexyDesk::Config::getInstance();
+       QSettings *settings = config->coreSettings();;
+       settings->beginGroup("facebook_plugin");
+       QString token = settings->value("access_token").toString();
+       settings->endGroup();
+       qDebug() << Q_FUNC_INFO << token;
+       return token;
+   }
+   void AuthWidget::readFriends()
+   {
+      QNetworkRequest request;
+      request.setUrl(QUrl("https://graph.facebook.com/me/friends?access_token="+this->tokenFromConfig()));
+      mReply = mNtManager->get(request);
+      connect(mReply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+   }
 }

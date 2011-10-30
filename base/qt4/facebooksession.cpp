@@ -5,7 +5,7 @@
 #include <QNetworkCookieJar>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-
+#include <QUrl>
 
 class FacebookSession::Private
 {
@@ -17,6 +17,7 @@ public:
   QNetworkReply *mReply;
   QString mToken;
   QByteArray mData;
+  QHash<QString,QVariant> mResult;
 };
 
 FacebookSession::FacebookSession(QObject *parent) :
@@ -30,15 +31,16 @@ FacebookSession::FacebookSession(QObject *parent) :
 
 void FacebookSession::makeRequest(const QString &url)
 {
-   QUrl ntUrl (url + (QLatin1String ("?access_token=") + d->mToken));
-   qDebug() << Q_FUNC_INFO << ntUrl; 
-   
-   QNetworkRequest request;
-   request.setUrl (ntUrl);
-   
-   d->mReply = d->mNtManager->get(request);
+   if(hasToken())
+   {
+      QUrl ntUrl (url + (QLatin1String ("?access_token=") + d->mToken));
+      QNetworkRequest request;
+      request.setUrl (ntUrl);
 
-   connect(d->mReply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+      d->mReply = d->mNtManager->get(request);
+      qDebug() << Q_FUNC_INFO << d->mReply->readAll();
+      connect(d->mReply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+   }
 }
 
 
@@ -60,7 +62,7 @@ void FacebookSession::onReadyRead()
      return;
    }
  
-    
+   d->mResult = result.data();
    qDebug () << Q_FUNC_INFO << d->mData;
    Q_EMIT ready();
 }
@@ -68,6 +70,11 @@ void FacebookSession::onReadyRead()
 QByteArray FacebookSession::rawData() const
 {
    return d->mData;
+}
+
+QHash<QString,QVariant> FacebookSession::parsedData() const
+{
+   return d->mResult;
 }
 
 bool FacebookSession::hasToken() const
@@ -86,5 +93,9 @@ bool FacebookSession::hasToken() const
   return true;
 }
 
+void FacebookSession::requestFriendsList()
+{
+   this->makeRequest("http://graph.facebook.com/me/friends");
+}
 
 
