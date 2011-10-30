@@ -24,7 +24,7 @@
 #include <QSettings>
 #include <QNetworkProxy>
 #include <QStringList>
-
+#include <friend.h>
 #include <plexy.h>
 #include <imagecache.h>
 
@@ -88,6 +88,8 @@ public Q_SLOTS:
     void setPhoto(const QString &str);
     void addWidget(const QString &widget);
     void changeLayer();
+    void requestContact(QString id);
+    void friendsBrowser();
 
 Q_SIGNALS:
     void configChanged();
@@ -104,6 +106,8 @@ Q_SIGNALS:
     void themepackNameChanged();
     void iconThemechanged();
     void openGLChanged();
+    void addContact(QString id);
+    void showFriendBrowser();
 
 private:
     Config(const QString &organization, const QString &application = QString(), QObject *parent = 0);

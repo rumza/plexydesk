@@ -53,6 +53,8 @@ public Q_SLOTS:
     void onReadyRead();
 private:
     void readFriends();
+    void checkTokenValidity();
+    bool m_validToken;
     QString tokenFromConfig() const;
     SocialData * socialdata;
     QWebViewItem *mView;

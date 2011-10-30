@@ -64,6 +64,8 @@ public Q_SLOTS:
     void backgroundChanged();
     void onNewWidget();
     void closeDesktopWidget();
+    void contactAdded(QString id);
+    void friendsBrowser();
 
 protected:
     //void drawBackground(QPainter *painter, const QRectF &rect);

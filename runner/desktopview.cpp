@@ -154,6 +154,8 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) : QGraphicsView
 
     connect(Config::getInstance(), SIGNAL(configChanged()), this, SLOT(backgroundChanged()));
     connect(Config::getInstance(), SIGNAL(widgetAdded()), this, SLOT(onNewWidget()));
+    connect(Config::getInstance(), SIGNAL(addContact(QString)), this, SLOT(contactAdded(QString)));
+    connect(Config::getInstance(), SIGNAL(showFriendBrowser()), this, SLOT(friendsBrowser()));
 
 #ifdef Q_WS_X11
     if (checkXCompositeExt()) {
@@ -168,6 +170,25 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) : QGraphicsView
 void DesktopView::onNewWidget()
 {
    // addExtension(Config::getInstance()->widgetList.last());
+}
+void DesktopView::contactAdded(QString id)
+{
+   Q_UNUSED(id);
+   DesktopWidget *parent = new DesktopWidget(QRectF(0,0,0,0), 0, 0);
+   parent->qmlFromUrl(QUrl(d->mThemeLoader->qmlFilesFromTheme("contact")));
+   scene()->addItem(parent);
+   connect(parent, SIGNAL(close()), this, SLOT(closeDesktopWidget()));
+   QPoint pos = d->mThemeLoader->widgetPos("contact");
+   parent->setPos(pos);
+}
+void DesktopView::friendsBrowser()
+{
+   DesktopWidget *parent = new DesktopWidget(QRectF(0,0,0,0), 0, 0);
+   parent->qmlFromUrl(QUrl(d->mThemeLoader->qmlFilesFromTheme("friendsBrowser")));
+   scene()->addItem(parent);
+   connect(parent, SIGNAL(close()), this, SLOT(closeDesktopWidget()));
+   QPoint pos = d->mThemeLoader->widgetPos("friendsBrowser");
+   parent->setPos(pos);
 }
 
 void DesktopView::closeDesktopWidget()

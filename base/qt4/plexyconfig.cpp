@@ -235,6 +235,16 @@ void Config::addWidget(const QString &widget)
     writeToFile();
 }
 
+void Config::requestContact(QString id)
+{
+   Q_EMIT addContact(id);
+}
+
+void Config::friendsBrowser()
+{
+   Q_EMIT showFriendBrowser();
+}
+
 void Config::changeLayer()
 {
     qDebug() << Q_FUNC_INFO;

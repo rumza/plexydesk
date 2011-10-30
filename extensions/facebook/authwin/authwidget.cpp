@@ -30,6 +30,7 @@
 #include <QPalette>
 #include "facebookdata.h"
 #include "authwidget.h"
+#include <QEventLoop>
 
 namespace PlexyDesk
 {
@@ -43,8 +44,11 @@ namespace PlexyDesk
        mNtManager = new QNetworkAccessManager(this);
        mCookie = new QNetworkCookieJar(this);
        mNtManager->setCookieJar(mCookie);
+       m_validToken = false;
+       socialdata = SocialData::getInstance();
        QRect webrect = QRect(10.0, 10.0, rect.width()-65, rect.height()-5);
        mView = new QWebViewItem(webrect, this);
+       this->checkTokenValidity();
        if (mView->page()) {
            mView->page()->setNetworkAccessManager(mNtManager);
        }
@@ -52,17 +56,18 @@ namespace PlexyDesk
        connect(mView, SIGNAL(loadProgress(int)), this, SLOT(onLoadProgress(int)));
        connect(mView, SIGNAL(loadStarted()), this, SLOT(onLoadStarted()));
        connect(mView, SIGNAL(urlChanged(const QUrl &)), this, SLOT(onUrlChanged(const QUrl &)));
-       if (token.isEmpty()) {
+       if (!m_validToken) {
            mView->setUrl(QUrl(QLatin1String("https://graph.facebook.com/oauth/authorize?client_" \
                         "id=170356722999159&redirect_uri=http://www.facebook.com/connect" \
                         "/login_success.html&type=user_agent&display=popup&scope=manage_pages,read_stream&response_type=token")));
        }else {
+
          this->configState(DesktopWidget::DOCK);
          this->setVisible(false);
          this->readFriends();
        }
        mProgressValue = 10;
-       socialdata = SocialData::getInstance();
+
    }
 
    AuthWidget::~AuthWidget()
@@ -190,6 +195,7 @@ namespace PlexyDesk
        JsonData result = mJsonHandle->property(mReply->readAll(), "data");
        socialdata->setData(result.data());
        if (result.type() == JsonData::Error) {
+           this->m_validToken = false;
            this->setVisible(true);
            configState(DesktopWidget::NORMALSIDE);
            mView->setVisible(true);
@@ -216,5 +222,35 @@ namespace PlexyDesk
       request.setUrl(QUrl("https://graph.facebook.com/me/friends?access_token="+this->tokenFromConfig()));
       mReply = mNtManager->get(request);
       connect(mReply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+      qDebug()<<Q_FUNC_INFO<<m_validToken;
+      if(this->m_validToken){
+         PlexyDesk::Config::getInstance()->friendsBrowser();
+      }
+   }
+   void AuthWidget::checkTokenValidity()
+   {
+      qDebug()<<Q_FUNC_INFO;
+      QString token = this->tokenFromConfig();
+      if (token != ""){
+         QNetworkRequest request;
+         request.setUrl(QUrl("https://graph.facebook.com/me?access_token="+token));
+         mReply = mNtManager->get(request);
+         QEventLoop eventLoop;
+         // also dispose the event loop after the reply has arrived
+         connect(mNtManager, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
+         eventLoop.exec();
+         JsonData result = mJsonHandle->property(mReply->readAll(), "data");
+         socialdata->setData(result.data());
+         if (result.type() == JsonData::Error) {
+            this->m_validToken = false;
+         }else
+         {
+            this->m_validToken = true;
+         }
+      }
+      else
+      {
+         this->m_validToken = false;
+      }
    }
 }

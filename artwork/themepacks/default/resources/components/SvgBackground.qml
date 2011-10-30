@@ -182,5 +182,20 @@ import Qt 4.7
               asynchronous : true
               smooth: true
           }
+          Image {
+              id: close
+              width: 16
+              height: 16
+              anchors.top: parent.top
+              anchors.topMargin: 10
+              anchors.right: parent.right
+              anchors.rightMargin: 10
+              source: "image://plexydesk_svgprovider/close"
+              MouseArea
+              {
+                 anchors.fill: parent
+                 onClicked: Qt.quit();
+              }
+          }
    }
 

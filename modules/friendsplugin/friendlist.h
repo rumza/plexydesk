@@ -25,6 +25,10 @@
 #include "friend.h"
 #include <socialdata.h>
 #include <QUrl>
+#include <plexy.h>
+#include <plexyconfig.h>
+
+using namespace PlexyDesk;
 
 QT_MODULE(Declarative)
 
@@ -48,7 +52,8 @@ public:
       facebookNameRole = Qt::UserRole + 1,
       facebookProfilePicture = Qt::UserRole + 2,
       facebookProfile = Qt::UserRole + 3,
-      myPicture = Qt::UserRole + 4
+      selectedFriendPicture = Qt::UserRole+10,
+      selectedFriendName = Qt::UserRole+11
    };
 
    QVariant data(const QModelIndex &index, int role) const;
@@ -58,17 +63,25 @@ public:
    //void removeFriend(Friend &pfriend);
    QDeclarativeListProperty<Friend> friends();
    Q_INVOKABLE void friendSelected(QString pid);
+   Q_INVOKABLE QUrl contactPicture();
+   Q_INVOKABLE QString contactName();
 
    void componentComplete(){};
    void classBegin(){};
 
+signals:
+   void friendContact(QString id);
+
 private slots:
    void resetModel();
+   void readFriend();
 
 private:
    Q_DISABLE_COPY(FriendListModel);
-   QList<Friend *> list;
+   QList<Friend *> m_List;
    SocialData *m_social;
+   Friend * m_SelectedFriendContact;
+   void getSelectedFriendFromData();
 };
 
 QML_DECLARE_TYPE(FriendListModel)

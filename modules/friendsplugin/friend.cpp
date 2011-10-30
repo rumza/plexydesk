@@ -18,6 +18,7 @@
 *******************************************************************************/
 
 #include "friend.h"
+#include <QDebug>
 
 Friend::Friend(QObject *parent)
 {
@@ -40,6 +41,7 @@ void Friend::setId(QString pid)
 {
    this->m_id = pid;
    this->m_picture = QUrl("http://graph.facebook.com/"+m_id+"/picture");
+   this->m_lPicture = QUrl("http://graph.facebook.com/"+m_id+"/picture?type=large");
    this->m_profile = QUrl("http://graph.facebook.com/"+m_id);
 }
 QString Friend::id() const
@@ -53,6 +55,10 @@ QString Friend::name() const
 QUrl Friend::picture() const
 {
    return this->m_picture;
+}
+QUrl Friend::largePicture() const
+{
+   return this->m_lPicture;
 }
 QUrl Friend::profile() const
 {

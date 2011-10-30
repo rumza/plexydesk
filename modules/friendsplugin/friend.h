@@ -36,12 +36,15 @@ public:
    QString name() const;
    QString id() const;
    QUrl picture() const;
+   QUrl largePicture() const;
    QUrl profile() const;
 private:
    QString m_name;
    QString m_id;
    QUrl m_picture;
    QUrl m_profile;
+   QUrl m_lPicture;
+   Friend &operator=(const Friend &);
 };
 
 #endif // FRIEND_H

@@ -24,6 +24,9 @@ FILE(GLOB FOLDERVIEW_IMGS folderview/resources/images/*.png)
 SET(FRIENDSBROWSER friendsBrowser/friendsbrowser.qml)
 SET(FRIENDSBROWSER_RES_QML friendsBrowser/resources/Friend.qml)
 
+#contact CMAKE entries
+SET(CONTACT contact/contact.qml)
+
 # DigitalClock CMAKE entries
 SET(DIGITALCLOCK digitalclock/digitalClock.qml)
 FILE(GLOB DIGITALCLOCK_IMGS digitalclock/images/*.png)
@@ -87,6 +90,7 @@ INSTALL(FILES ${FOLDERVIEW_IMGS} DESTINATION ${RESOURCES_DEST_DIR})
 
 INSTALL(FILES ${FRIENDSBROWSER} DESTINATION share/plexy/themepack/default/friendsBrowser)
 INSTALL(FILES ${FRIENDSBROWSER_RES_QML} DESTINATION share/plexy/themepack/default/friendsBrowser/resources)
+INSTALL(FILES ${CONTACT} DESTINATION share/plexy/themepack/default/contact)
 
 INSTALL(FILES ${DIGITALCLOCK} DESTINATION share/plexy/themepack/default/digitalclock)
 INSTALL(FILES ${DIGITALCLOCK_IMGS} DESTINATION ${RESOURCES_DEST_DIR})

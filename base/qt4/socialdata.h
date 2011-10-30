@@ -37,14 +37,12 @@ public slots:
    void readSession();
 signals:
    void dataReady();
-
 private:
    Q_DISABLE_COPY(SocialData);
    SocialData(QObject *parent = 0);
    static SocialData * m_instance;
    QHash<QString,QVariant> m_data;
    FacebookSession *session;
-
 };
 
 #endif // SOCIALDATA_H
