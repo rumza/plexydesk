@@ -50,6 +50,26 @@ void RestData::init()
     qDebug() << Q_FUNC_INFO;
 }
 
+QString RestData::id() const
+{
+    return QLatin1String ("REST");
+}
+
+QVariant RestData::data(int role) const
+{
+    switch (role) {
+        default:
+            return QVariant();
+    }
+}
+
+QHash<int, QByteArray> RestData::roleNames() const
+{
+    QHash<int, QByteArray> rolenames;
+    rolenames[TitleRole] = "REST";
+    rolenames[DataRole] = d->data["data"].toByteArray();
+    return rolenames;
+}
 RestData::~RestData()
 {
     delete d;
@@ -82,6 +102,7 @@ void RestData::replyFinished(QNetworkReply *reply)
     response["data"] = QVariant(reply->readAll());
     d->data = response;
     Q_EMIT dataReady();
+    Q_EMIT dataChanged();
 }
 
 void RestData::handleAuth(QNetworkReply *r, QAuthenticator *auth)

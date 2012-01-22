@@ -31,10 +31,17 @@ class RestData : public PlexyDesk::DataPlugin
     Q_OBJECT
 
 public:
+    enum Roles {
+        TitleRole = Qt::UserRole + 1,
+        DataRole
+    };
     RestData(QObject *object = 0);
     virtual ~RestData();
     void init();
     QVariantMap readAll();
+    QString id() const;
+    QVariant data(int) const;
+    QHash<int, QByteArray> roleNames() const;
 
 public Q_SLOTS:
     void pushData(QVariant &data);

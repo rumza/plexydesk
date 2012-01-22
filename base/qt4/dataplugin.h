@@ -58,10 +58,17 @@ public:
     virtual ~DataPlugin() {
     }
     virtual QVariantMap readAll() = 0;
-public slots:
+
+    virtual QString id() const = 0;
+    virtual QVariant data (int role) const = 0;
+    virtual QHash<int, QByteArray> roleNames() const = 0;
+
+public Q_SLOTS:
     virtual void pushData(QVariant &) = 0;
-signals:
+
+Q_SIGNALS:
     void dataReady();
+    void dataChanged();
 };
 }
 #endif
