@@ -136,7 +136,6 @@ void PluginLoader::scanDisk()
 void PluginLoader::setPluginPrefix(const QString &path)
 {
 	d->mPluginPrefix = path;
-	
 }
 void pluginPrefix() const 
 {
