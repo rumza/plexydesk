@@ -47,8 +47,7 @@ public:
 
 PluginLoader::PluginLoader() : d(new Private)
 {
-    d->mPluginPrefix = QDir::toNativeSeparators(Config::getInstance()->plexydeskBasePath() +
-        QString(QLatin1String("/share/plexy/ext/groups/")));
+    d->mPluginPrefix = QDir::toNativeSeparators(Config::getInstance()->plexydeskBasePath());
 }
 
 PluginLoader::~PluginLoader()
