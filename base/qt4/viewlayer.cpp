@@ -25,8 +25,6 @@ private:
 
 void ViewLayer::Private::clean()
 {
-    qDebug() << "Cleaning layers";
-
     QStringList keysList = layer.keys();
     foreach(QString key, keysList)
     {

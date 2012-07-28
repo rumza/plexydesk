@@ -29,11 +29,11 @@
 
 using namespace PlexyDesk;
 
-class DesktopView : public AbstractDesktopView
+class DesktopView : public QObject, public AbstractDesktopView
 {
     Q_OBJECT
 public:
-    DesktopView(QGraphicsScene *scene = new QGraphicsScene(), QWidget *parent = 0);
+    DesktopView(QObject *parent);
     virtual ~DesktopView();
 
     enum {none, folder, qml, img};
@@ -48,7 +48,7 @@ public:
     void addWallpaperItem();
     void registerPhotoDialog();
     PlexyDesk::WidgetPlugin *registerHandler(const QString &name, bool effects_on = false);
-
+    QGraphicsScene * scene() const;
     void enableOpenGL(bool state);
 
 #ifdef Q_WS_X11

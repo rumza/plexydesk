@@ -98,8 +98,7 @@ bool getLessThanWidget(const QGraphicsItem *it1, const QGraphicsItem *it2)
     return it1->zValue() < it2->zValue();
 }
 
-DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) :
-    AbstractDesktopView(scene, parent), d(new Private)
+DesktopView::DesktopView(QObject *parent) :QObject(parent), d(new Private)
 {
     /* Setup */
 
@@ -109,13 +108,12 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) :
                    Qt::FramelessWindowHint |
                    Qt::WindowStaysOnBottomHint);
 #else
-    setWindowFlags(Qt::FramelessWindowHint |
+    viewportHost()->setWindowFlags(Qt::FramelessWindowHint |
                    Qt::WindowStaysOnBottomHint);
 #endif
 
-    setFrameStyle(QFrame::NoFrame);
-
-    setAttribute(Qt::WA_QuitOnClose);
+    viewportHost()->setFrameStyle(QFrame::NoFrame);
+    viewportHost()->setAttribute(Qt::WA_QuitOnClose);
 
 #ifdef Q_WS_WIN
     // Needed so it gets no focus on win when starting up
@@ -125,10 +123,10 @@ DesktopView::DesktopView(QGraphicsScene *scene, QWidget *parent) :
     //::SetWindowPos(this->winId(), HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE );
 #endif
 
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    viewportHost()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    viewportHost()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    viewportHost()->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
 
     d->openglOn = false;
@@ -361,18 +359,18 @@ void DesktopView::backgroundChanged()
     d->mBackgroundSource =
          qobject_cast<BackgroundSource *>(PluginLoader::getInstance()->instance("classicbackdrop"));
     if (!d->openglOn) {
-        setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        viewportHost()->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     }
-    setCacheMode(QGraphicsView::CacheNone);
-    invalidateScene();
+    viewportHost()->setCacheMode(QGraphicsView::CacheNone);
+    viewportHost()->invalidateScene();
     scene()->update();
-    update();
+    viewportHost()->update();
 
     if (!d->openglOn) {
-        setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        viewportHost()->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     }
 
-    setCacheMode(QGraphicsView::CacheBackground);
+    viewportHost()->setCacheMode(QGraphicsView::CacheBackground);
 }
 
 /*
@@ -529,7 +527,7 @@ void DesktopView::registerPhotoDialog()
             //widget->configState(state);
             scene()->addItem(widget);
 
-            const QRectF viewRect (0.0, 0.0, this->width(), this->height());
+            const QRectF viewRect (0.0, 0.0, viewportHost()->width(), viewportHost()->height());
             const QPointF center = viewRect.center();
 
             float x_pos = center.x() - (widget->boundingRect().width()/2);
@@ -557,7 +555,7 @@ WidgetPlugin *DesktopView::registerHandler(const QString &name, bool effects_on)
         if (widget) {
             scene()->addItem(widget);
 
-            const QRectF viewRect (0.0, 0.0, this->width(), this->height());
+            const QRectF viewRect (0.0, 0.0, viewportHost()->width(), viewportHost()->height());
             const QPointF center = viewRect.center();
 
             float x_pos = center.x() - (widget->boundingRect().width()/2);
@@ -579,6 +577,11 @@ WidgetPlugin *DesktopView::registerHandler(const QString &name, bool effects_on)
     }
 
     return NULL;
+}
+
+QGraphicsScene *DesktopView::scene() const
+{
+    return viewportHost()->scene();
 }
 
 /*
@@ -603,7 +606,7 @@ void DesktopView::mousePressEvent(QMouseEvent *event)
 {
     // Commented out due to QML stacking problem
     //setTopMostWidget(event->pos());
-    QGraphicsView::mousePressEvent(event);
+    //QGraphicsView::mousePressEvent(event);
 }
 
 void DesktopView::setTopMostWidget(const QPoint &pt)
@@ -634,5 +637,5 @@ void DesktopView::keyReleaseEvent(QKeyEvent *event)
     if((event->key() == Qt::Key_Q) && event->modifiers() == (Qt::ShiftModifier | Qt::ControlModifier))
         emit closeApplication();
 
-    QGraphicsView::keyReleaseEvent(event);
+   // QGraphicsView::keyReleaseEvent(event);
 }

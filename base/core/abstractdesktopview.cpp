@@ -33,8 +33,6 @@
 
 #include "abstractdesktopview.h"
 
-
-
 /**
   \class PlexyDesk::AbstractDesktopView
 
@@ -60,12 +58,36 @@
 **/
 namespace PlexyDesk
 {
+class AbstractDesktopView::PrivateAbstractDesktopView
+{
+public:
+    PrivateAbstractDesktopView() {}
+    ~PrivateAbstractDesktopView() {}
+
+    ViewportHost *mViewportHost;
+};
+
+AbstractDesktopView::AbstractDesktopView() : d(new PrivateAbstractDesktopView)
+{
+    d->mViewportHost = new QGraphicsView(new QGraphicsScene);
+}
+
+AbstractDesktopView::~AbstractDesktopView()
+{
+    if (d->mViewportHost)
+        delete d->mViewportHost;
+}
+
+ViewportHost *AbstractDesktopView::viewportHost() const
+{
+    return d->mViewportHost;
+}
 
 void AbstractDesktopView::enableOpenGL(bool state)
 {
+    /*
     if (state) {
-        setViewport(new QGLWidget(QGLFormat(
-                        QGL::DoubleBuffer )));
+        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
         setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
         setOptimizationFlag(QGraphicsView::DontAdjustForAntialiasing);
         setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
@@ -75,7 +97,7 @@ void AbstractDesktopView::enableOpenGL(bool state)
         setOptimizationFlags(QGraphicsView::DontSavePainterState);
         setOptimizationFlag(QGraphicsView::DontClipPainter);
         setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    }
+    }*/
 }
 
 void AbstractDesktopView::showLayer(const QString &layer)
@@ -83,7 +105,4 @@ void AbstractDesktopView::showLayer(const QString &layer)
     Q_UNUSED(layer);
 }
 
-/*
-
- */
 }

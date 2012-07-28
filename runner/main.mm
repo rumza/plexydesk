@@ -25,6 +25,7 @@ int main(int argc, char **argv)
             PlexyDesk::PluginLoader::getInstanceWithPrefix(
                 QDir::toNativeSeparators(PlexyDesk::Config::getInstance()->plexydeskBasePath()  + QLatin1String("/share/plexy/ext/groups/")),
                 QDir::toNativeSeparators(PlexyDesk::Config::getInstance()->plexydeskBasePath() + QLatin1String("/lib/plexyext/")));
+
     QString appIconPath = PlexyDesk::Config::getInstance()->plexydeskBasePath() +
         "/share/plexy/plexydesk.png";
     QIcon appIcon = QIcon(QDir::toNativeSeparators(appIconPath));

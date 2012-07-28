@@ -27,24 +27,19 @@
 namespace PlexyDesk
 {
 
-class PLEXYDESK_EXPORT AbstractDesktopView : public QGraphicsView
+class PLEXYDESK_EXPORT AbstractDesktopView
 {
-    Q_OBJECT
-
 public:
-    AbstractDesktopView(QGraphicsScene *scene = new QGraphicsScene(),
-            QWidget *parent = 0) : QGraphicsView (scene, parent) {}
+    AbstractDesktopView();
+    virtual ~AbstractDesktopView();
 
-    virtual void addExtension(const QString &name,
-                              const QString &layer = QLatin1String("Widgets"),
-                              const QPoint &pos = QPoint(0, 0),
-                              PlexyDesk::AbstractDesktopWidget::State state = PlexyDesk::AbstractDesktopWidget::DOCKED) = 0;
-
+    ViewportHost *viewportHost() const;
     virtual void enableOpenGL(bool);
     virtual void showLayer(const QString &name) = 0;
 
-Q_SIGNALS:
-    void closeApplication();
+private:
+    class PrivateAbstractDesktopView;
+    PrivateAbstractDesktopView *const d;
 };
 
 } // namespace PlexyDesk

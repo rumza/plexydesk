@@ -14,7 +14,6 @@ public:
     AbstractSource(QObject *parent = 0) : QObject(parent)
     {
     }
-
 };
 
 } // namespace PlexyDesk

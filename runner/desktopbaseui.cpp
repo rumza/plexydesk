@@ -109,20 +109,20 @@ void DesktopBaseUi::setup()
             continue;
         }
 
-        AbstractDesktopView *view = d->mViewPlugin->view(scene);
+        QGraphicsView *view = d->mViewPlugin->view(scene)->viewportHost();
         if (!view) {
             continue;
         }
 #ifdef PLEXYNAME
         view->setWindowTitle(QString(PLEXYNAME));
 #endif
-        view->enableOpenGL(d->mConfig->isOpenGL());
+        //view->enableOpenGL(d->mConfig->isOpenGL());
         view->resize(desktopSize);
 #ifdef PLEXYNAME
         view->setWindowTitle(QString(PLEXYNAME));
 #endif
 
-        view->enableOpenGL(d->mConfig->isOpenGL());
+        //view->enableOpenGL(d->mConfig->isOpenGL());
         view->move(d->mDesktopWidget->screenGeometry(i).x(),
                   d->mDesktopWidget->screenGeometry(i).y());
         view->setSceneRect (desktopScreenRect);
@@ -134,8 +134,8 @@ void DesktopBaseUi::setup()
         info.setDesktop(NETWinInfo::OnAllDesktops);
         info.setWindowType(NET::Desktop);
 #endif
-        view->showLayer(QLatin1String("Widgets"));
-        d->mViewList[i] = view;
+        //view->showLayer(QLatin1String("Widgets"));
+        //d->mViewList[i] = ;
         QWidget *parentWidget = qobject_cast<QWidget*>(parent());
         if(parentWidget) {
             this->resize(view->size());
@@ -162,14 +162,14 @@ void DesktopBaseUi::screenResized(int screen)
     if(!screen)
         return;
 
-    AbstractDesktopView *view = d->mViewList[screen];
+    //QGraphicsView *view = d->mViewList[screen];
     QRect desktopScreenRect = d->mDesktopWidget->screenGeometry(screen);
 #ifdef Q_WS_WIN
     // A 1px hack to make the widget fullscreen and not covering the toolbar on Win
     desktopScreenRect.setHeight(desktopScreenRect.height()-1);
 #endif
 
-    view->resize(desktopScreenRect.size());
+    //view->resize(desktopScreenRect.size());
 }
 
 QRect DesktopBaseUi::desktopRect() const

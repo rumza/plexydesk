@@ -50,6 +50,7 @@
 #define __PLEXY_EXPORTS
 
 #include <QtCore/QtGlobal>
+#include <QGraphicsView>
 
 #ifdef Q_CC_MSVC
 #define __PRETTY_FUNCTION__ QString("%1 %2 %3 %4 %4").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__).arg(__FUNCDNAME__).arg(__FUNCSIG__)
@@ -75,6 +76,9 @@
  * you will find many example usages as we include them in this
  * source distrubution.
  * */
+
+typedef QString String;
+typedef QGraphicsView ViewportHost;
 
 #define PLUGIN_EXPORT(name, sym) \
     extern "C" { void *setup_ ## name(){return new sym; }}

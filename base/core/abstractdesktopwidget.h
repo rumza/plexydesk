@@ -97,7 +97,6 @@ Q_SIGNALS:
 
 protected:
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
