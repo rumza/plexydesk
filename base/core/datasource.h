@@ -78,23 +78,16 @@
 namespace PlexyDesk
 {
 
-class PLEXYDESK_EXPORT DataSource : public AbstractSource
+class DataSource : public AbstractSource
 {
-    Q_OBJECT
-
 public:
-    DataSource(QObject *object = 0) {
-        Q_UNUSED(object);
-    }
+    DataSource() {}
     virtual ~DataSource() {
     }
     virtual QVariantMap readAll() = 0;
-
-public Q_SLOTS:
     virtual void setArguments(QVariant &args) = 0;
-
-Q_SIGNALS:
-    void ready();
+    void ready() {
+    }
 };
 
 }

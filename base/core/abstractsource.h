@@ -2,16 +2,13 @@
 #define ABSTRACT_DATA_SOURCE_H
 
 #include <plexy.h>
-#include <QtCore>
 
 namespace PlexyDesk
 {
-class PLEXYDESK_EXPORT AbstractSource : public QObject
+class AbstractSource
 {
-    Q_OBJECT
-
 public:
-    AbstractSource(QObject *parent = 0) : QObject(parent)
+    AbstractSource()
     {
     }
 };

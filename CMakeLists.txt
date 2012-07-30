@@ -27,12 +27,13 @@ CMAKE_POLICY(SET CMP0003 OLD)
 SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules)
 
 # Needed/optional packages definitions
+IF (NOT MACOSX_BUILD)
 FIND_PACKAGE(Qt4 4.7.0 COMPONENTS QtCore QtGui QtOpenGL QtXml QtDeclarative QtSql QtSvg REQUIRED)
 FIND_PACKAGE(FFMPEG) #optional
 FIND_PACKAGE(OpenCV) #optional
 FIND_PACKAGE(QImageBlitz REQUIRED)
 FIND_PACKAGE(OpenGL REQUIRED)
-
+ENDIF (NOT MACOSX_BUILD)
 
 # Global variable CMAKE_BUILD_TYPE handling
 # None (CMAKE_C_FLAGS or CMAKE_CXX_FLAGS used)
@@ -75,6 +76,7 @@ ENDIF(WIN32)
 INCLUDE(PkgConfigGetVar)
 INCLUDE(GNUInstallDirs)
 
+IF (NOT MACOSX_BUILD)
 # *** QT vars handling ***
 # This will cause cmake to include and link against the OpenGL module.
 # Set all flags first and then use the QT_USE_FILE to set everything.
@@ -99,6 +101,8 @@ SET(QT_USE_QTDECLARATIVE TRUE)
 INCLUDE(${QT_USE_FILE})
 
 SET(QT_IMPORTS_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/qt4/imports)
+
+ENDIF (NOT MACOSX_BUILD)
 
 # On Windows we use a predefined QT_IMPORTS_INSTALL_DIR
 IF (NOT WIN32)
@@ -240,34 +244,34 @@ IF(WIN32)
 ENDIF(WIN32)
 
 # *** ALL PLATFORMS ***
-ADD_SUBDIRECTORY(3rdparty/mime)
-ADD_SUBDIRECTORY(3rdparty/qplexymime)
-ADD_SUBDIRECTORY(3rdparty/qt/folderlistmodel)
-ADD_SUBDIRECTORY(3rdparty/webitem)
-ADD_SUBDIRECTORY(base/qt4)
+#ADD_SUBDIRECTORY(3rdparty/mime)
+#ADD_SUBDIRECTORY(3rdparty/qplexymime)
+#ADD_SUBDIRECTORY(3rdparty/qt/folderlistmodel)
+#ADD_SUBDIRECTORY(3rdparty/webitem)
+#ADD_SUBDIRECTORY(base/qt4)
 ADD_SUBDIRECTORY(base/core)
-ADD_SUBDIRECTORY(extensions/widgets/clock)
-ADD_SUBDIRECTORY(extensions/widgets/photoframe)
-ADD_SUBDIRECTORY(extensions/widgets/folderwidget)
-ADD_SUBDIRECTORY(extensions/facebook/authwin)
-ADD_SUBDIRECTORY(extensions/backdrop/classicdrop)
-ADD_SUBDIRECTORY(extensions/widgets/youtubewidget)
-ADD_SUBDIRECTORY(runner)
-ADD_SUBDIRECTORY(modules/fbjson)
+#ADD_SUBDIRECTORY(extensions/widgets/clock)
+#ADD_SUBDIRECTORY(extensions/widgets/photoframe)
+#ADD_SUBDIRECTORY(extensions/widgets/folderwidget)
+#ADD_SUBDIRECTORY(extensions/facebook/authwin)
+#ADD_SUBDIRECTORY(extensions/backdrop/classicdrop)
+#ADD_SUBDIRECTORY(extensions/widgets/youtubewidget)
+#ADD_SUBDIRECTORY(runner)
+#ADD_SUBDIRECTORY(modules/fbjson)
 
-if (APPLE)
-ADD_SUBDIRECTORY(extensions/backdrop/mac_background)
-endif (APPLE)
+#if (APPLE)
+#ADD_SUBDIRECTORY(extensions/backdrop/mac_background)
+#endif (APPLE)
 
 # *** Desktop UI Plugins ***
-ADD_SUBDIRECTORY(extensions/desktop/plexy)
+#ADD_SUBDIRECTORY(extensions/desktop/plexy)
 
 # *** UI widgets - ALL PLATFORMS ***
 # Youtube is diabled ListView is now at extensions/widgets
 #ADD_SUBDIRECTORY(extensions/widgets/youtubewidget)
 
 # *** Data plugins - ALL PLATFORMS ***
-ADD_SUBDIRECTORY(extensions/data/rest)
+#ADD_SUBDIRECTORY(extensions/data/rest)
 # Youtube is diabled ListView is now at extensions/widgets
 #ADD_SUBDIRECTORY(extensions/data/utube)
 

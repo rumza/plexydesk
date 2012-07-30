@@ -49,8 +49,10 @@
 #ifndef __PLEXY_EXPORTS
 #define __PLEXY_EXPORTS
 
+#ifndef __APPLE__
 #include <QtCore/QtGlobal>
 #include <QGraphicsView>
+#endif
 
 #ifdef Q_CC_MSVC
 #define __PRETTY_FUNCTION__ QString("%1 %2 %3 %4 %4").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__).arg(__FUNCDNAME__).arg(__FUNCSIG__)
@@ -61,14 +63,6 @@
 #endif
 
 #define __SYSTEM_HAVE_GCC_VISIBILITY
-
-/*
-#if defined(plexydeskcore_EXPORTS)
-  #define  PLEXYDESK_EXPORT Q_DECL_EXPORT
-#else
-  #define  PLEXYDESK_EXPORT Q_DECL_IMPORT
-#endif
-*/
 
 #if defined _WIN32 || defined __CYGWIN__
   #ifdef BUILDING_DLL
@@ -93,7 +87,6 @@
     #define PLEXYDESK_EXPORT
     #define PLEXYDESK_IMPORT
   #endif
-#endif
 
 //TODO
 //add dllexport for windows
@@ -103,6 +96,7 @@
  * you will find many example usages as we include them in this
  * source distrubution.
  * */
+#ifndef __APPLE__
 namespace PlexyDesk
 {
     typedef QString String;
@@ -110,6 +104,7 @@ namespace PlexyDesk
     typedef QRectF FloatRect;
     typedef QStringList StringList;
 }
+#endif
 
 #define  Q_UINT32 unsigned int
 
