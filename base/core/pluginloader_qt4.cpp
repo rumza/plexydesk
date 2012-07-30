@@ -30,12 +30,13 @@ namespace PlexyDesk
 {
 PluginLoader *PluginLoader::mInstance = 0;
 
-class PluginLoader::Private
+class PluginLoader::PrivatePluginLoader
 {
 public:
-    Private() {
+    typedef QHash <QString, AbstractPluginInterface *> Interface;
+    PrivatePluginLoader() {
     }
-    ~Private() {
+    ~PrivatePluginLoader() {
     }
     Interface mPluginGroups;
     QString mPluginPrefix;
@@ -43,7 +44,7 @@ public:
     QHash<QString, QStringList> mDict;
 };
 
-PluginLoader::PluginLoader() : d(new Private)
+PluginLoader::PluginLoader() : d(new PrivatePluginLoader)
 {
 }
 
@@ -52,11 +53,10 @@ PluginLoader::~PluginLoader()
     delete d;
 }
 
-PluginLoader *PluginLoader::getInstanceWithPrefix(const QString &desktopPrefix, const QString &libPrefix)
+PluginLoader *PluginLoader::getInstanceWithPrefix(const String &desktopPrefix, const String &libPrefix)
 {
     if (!mInstance) {
         mInstance = new PluginLoader();
-        qDebug() << Q_FUNC_INFO ;
         mInstance->setPluginPrefix(libPrefix);
         mInstance->setPluginInfoPrefix(desktopPrefix);
         mInstance->scanForPlugins();
@@ -167,7 +167,7 @@ QString PluginLoader::pluginPrefix() const
 
 void PluginLoader::loadDesktop(const QString &path)
 {
-    QSettings desktopFile(path, QSettings::IniFormat, this);
+    QSettings desktopFile(path, QSettings::IniFormat);
     desktopFile.beginGroup("Desktop Entry");
     load(desktopFile.value("Type").toString(), desktopFile.value("X-PLEXYDESK-Library").toString());
     desktopFile.endGroup();

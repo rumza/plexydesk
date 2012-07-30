@@ -40,13 +40,14 @@ public:
 
     virtual ~DesktopViewPlugin(){}
 
-    virtual AbstractDesktopView *view(QGraphicsScene *scene) = 0;
+    virtual ViewportHost *view(QGraphicsScene *scene) = 0;
 
     virtual void setRect (const QRect &rect) = 0;
 
 Q_SIGNALS:
     void data(QVariant &value);
 };
+
 }
 
 #endif

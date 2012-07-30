@@ -76,13 +76,27 @@
  * you will find many example usages as we include them in this
  * source distrubution.
  * */
-
-typedef QString String;
-typedef QGraphicsView ViewportHost;
-
-#define PLUGIN_EXPORT(name, sym) \
-    extern "C" { void *setup_ ## name(){return new sym; }}
+namespace PlexyDesk
+{
+    typedef QString String;
+    typedef QGraphicsView ViewportHost;
+    typedef QRectF FloatRect;
+    typedef QStringList StringList;
+}
 
 #define  Q_UINT32 unsigned int
+
+#define PLEXYDESK_PLUGIN_META_DATA \
+    static const char plexydesk_plugin_meta_data[] = \
+    "api=1.0";
+
+#define PLEXYDESK_EXPORT_EXTENSION(CLASSNAME)  \
+    __attribute__ ((section (".plexyext"))) __attribute__((used)) PLEXYDESK_PLUGIN_META_DATA \
+    void *get_instance() \
+    { \
+        return new CLASSNAME; \
+    }
+
+
 
 #endif

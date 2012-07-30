@@ -109,7 +109,7 @@ void DesktopBaseUi::setup()
             continue;
         }
 
-        QGraphicsView *view = d->mViewPlugin->view(scene)->viewportHost();
+        QGraphicsView *view = d->mViewPlugin->view(scene);
         if (!view) {
             continue;
         }

@@ -24,34 +24,38 @@
 
 namespace PlexyDesk
 {
-class PLEXYDESK_EXPORT PluginLoader : public QObject
+class PLEXYDESK_EXPORT PluginLoader
 {
-    Q_OBJECT
-
 public:
-    typedef QHash <QString, AbstractPluginInterface *> Interface;
-
     PluginLoader();
     virtual ~PluginLoader();
 
-    static PluginLoader *getInstanceWithPrefix(const QString &desktopPrefix, const QString &libPrefix);
+    static PluginLoader *getInstanceWithPrefix(const String &desktopPrefix, const String &libPrefix);
+
     static PluginLoader *getInstance();
 
-    QStringList listPlugins(const QString &types);
-    AbstractSource *instance(const QString &name);
+    StringList listPlugins(const String &types);
+
+    AbstractSource *instance(const String &name);
+
     void scanForPlugins();
-    void setPluginPrefix(const QString &path);
-    void setPluginInfoPrefix(const QString &path);
-    QString pluginInforPrefix() const;
-    QString pluginPrefix() const;
+
+    void setPluginPrefix(const String &path);
+
+    String pluginPrefix() const;
+
+    void setPluginInfoPrefix(const String &path);
+
+    String pluginInforPrefix() const;
 
 protected:
-    void loadDesktop(const QString &path);
-    void load(const QString &_interface, const QString &plugin);
+    void loadDesktop(const String &path);
+
+    void load(const String &_interface, const String &plugin);
 
 private:
-    class Private;
-    Private *const d;
+    class PrivatePluginLoader;
+    PrivatePluginLoader *const d;
 #ifdef Q_WS_WIN
     static PluginLoader *mInstance;
 #else

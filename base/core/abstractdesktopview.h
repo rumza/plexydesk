@@ -21,8 +21,6 @@
 #define PLEXY_ABSTRACT_DESKTOP_VIEW_H
 
 #include <plexy.h>
-#include <widgetplugin.h>
-#include <abstractdesktopwidget.h>
 
 namespace PlexyDesk
 {
@@ -33,9 +31,11 @@ public:
     AbstractDesktopView();
     virtual ~AbstractDesktopView();
 
-    ViewportHost *viewportHost() const;
-    virtual void enableOpenGL(bool);
-    virtual void showLayer(const QString &name) = 0;
+    virtual StringList hostsViewports() const;
+
+    virtual ViewportHost *viewportHost(const String &hostName) const;
+
+    virtual FloatRect desktopGeometry() const;
 
 private:
     class PrivateAbstractDesktopView;

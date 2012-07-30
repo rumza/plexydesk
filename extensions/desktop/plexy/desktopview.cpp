@@ -98,7 +98,7 @@ bool getLessThanWidget(const QGraphicsItem *it1, const QGraphicsItem *it2)
     return it1->zValue() < it2->zValue();
 }
 
-DesktopView::DesktopView(QObject *parent) :QObject(parent), d(new Private)
+DesktopView::DesktopView(QWidget *parent) :QGraphicsView(parent), d(new Private)
 {
     /* Setup */
 
@@ -108,12 +108,12 @@ DesktopView::DesktopView(QObject *parent) :QObject(parent), d(new Private)
                    Qt::FramelessWindowHint |
                    Qt::WindowStaysOnBottomHint);
 #else
-    viewportHost()->setWindowFlags(Qt::FramelessWindowHint |
+    setWindowFlags(Qt::FramelessWindowHint |
                    Qt::WindowStaysOnBottomHint);
 #endif
 
-    viewportHost()->setFrameStyle(QFrame::NoFrame);
-    viewportHost()->setAttribute(Qt::WA_QuitOnClose);
+    setFrameStyle(QFrame::NoFrame);
+    setAttribute(Qt::WA_QuitOnClose);
 
 #ifdef Q_WS_WIN
     // Needed so it gets no focus on win when starting up
@@ -123,10 +123,10 @@ DesktopView::DesktopView(QObject *parent) :QObject(parent), d(new Private)
     //::SetWindowPos(this->winId(), HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE );
 #endif
 
-    viewportHost()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    viewportHost()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    viewportHost()->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
 
     d->openglOn = false;
@@ -194,7 +194,6 @@ void DesktopView::enableOpenGL(bool state)
         d->openglOn = false;
     }
 
-    AbstractDesktopView::enableOpenGL (state);
 }
 
 void DesktopView::showLayer(const QString &layer)
@@ -359,18 +358,18 @@ void DesktopView::backgroundChanged()
     d->mBackgroundSource =
          qobject_cast<BackgroundSource *>(PluginLoader::getInstance()->instance("classicbackdrop"));
     if (!d->openglOn) {
-        viewportHost()->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     }
-    viewportHost()->setCacheMode(QGraphicsView::CacheNone);
-    viewportHost()->invalidateScene();
+    setCacheMode(QGraphicsView::CacheNone);
+    invalidateScene();
     scene()->update();
-    viewportHost()->update();
+    update();
 
     if (!d->openglOn) {
-        viewportHost()->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     }
 
-    viewportHost()->setCacheMode(QGraphicsView::CacheBackground);
+    setCacheMode(QGraphicsView::CacheBackground);
 }
 
 /*
@@ -527,7 +526,7 @@ void DesktopView::registerPhotoDialog()
             //widget->configState(state);
             scene()->addItem(widget);
 
-            const QRectF viewRect (0.0, 0.0, viewportHost()->width(), viewportHost()->height());
+            const QRectF viewRect (0.0, 0.0, width(), height());
             const QPointF center = viewRect.center();
 
             float x_pos = center.x() - (widget->boundingRect().width()/2);
@@ -555,7 +554,7 @@ WidgetPlugin *DesktopView::registerHandler(const QString &name, bool effects_on)
         if (widget) {
             scene()->addItem(widget);
 
-            const QRectF viewRect (0.0, 0.0, viewportHost()->width(), viewportHost()->height());
+            const QRectF viewRect (0.0, 0.0, width(), height());
             const QPointF center = viewRect.center();
 
             float x_pos = center.x() - (widget->boundingRect().width()/2);
@@ -579,10 +578,6 @@ WidgetPlugin *DesktopView::registerHandler(const QString &name, bool effects_on)
     return NULL;
 }
 
-QGraphicsScene *DesktopView::scene() const
-{
-    return viewportHost()->scene();
-}
 
 /*
 
@@ -606,7 +601,7 @@ void DesktopView::mousePressEvent(QMouseEvent *event)
 {
     // Commented out due to QML stacking problem
     //setTopMostWidget(event->pos());
-    //QGraphicsView::mousePressEvent(event);
+    QGraphicsView::mousePressEvent(event);
 }
 
 void DesktopView::setTopMostWidget(const QPoint &pt)

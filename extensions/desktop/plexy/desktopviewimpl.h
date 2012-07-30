@@ -46,7 +46,7 @@ public:
 
     virtual ~DesktopViewPluginImpl();
 
-    PlexyDesk::AbstractDesktopView *view(QGraphicsScene *scene);
+    PlexyDesk::ViewportHost *view(QGraphicsScene *scene);
 
     void setRect (const QRect &rect);
 

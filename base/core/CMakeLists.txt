@@ -46,10 +46,10 @@ ADD_DEFINITIONS(-DPLEXYPREFIX="${CMAKE_INSTALL_PREFIX}"
 SET(sourceFiles
     abstractplugininterface.cpp
     abstractdesktopwidget.cpp
-    abstractdesktopview.cpp
+    abstractdesktopview_qt4.cpp
     backdropplugin.cpp
     abstractsource.h
-    pluginloader.cpp
+    pluginloader_qt4.cpp
     pendingjob.cpp
     )
 
@@ -108,8 +108,6 @@ IF(MINGW)
         )
 ENDIF(MINGW)
 
-TARGET_LINK_LIBRARIES(${PLEXY_CORE_LIBRARY}
-    ${libs}
-    )
+TARGET_LINK_LIBRARIES(${PLEXY_CORE_LIBRARY} ${libs})
 
 INSTALL(TARGETS ${PLEXY_CORE_LIBRARY} DESTINATION ${CMAKE_INSTALL_LIBDIR})

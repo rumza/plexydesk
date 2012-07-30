@@ -38,15 +38,8 @@
 
   \brief Base class for creating DesktopViews
 
-  \fn PlexyDesk::AbstractDesktopView::enableOpenGL()
-
-  \param state Method to enable OpenGL rendering on the view, internally
-               it assigns a QGLWidget to the viewport.
-
-  \fn PlexyDesk::AbstractDesktopView::showLayer()
-
-   \fn  PlexyDesk::AbstractDesktopView::addExtension()
-   \brief Adds an Widget Extension to Plexy Desktop, give the widget
+  \fn  PlexyDesk::AbstractDesktopView::addExtension()
+  \brief Adds an Widget Extension to Plexy Desktop, give the widget
    name in string i.e "clock" or "radio", the internals will
    take care of the loading the widget if a plugin matching the name is
    found.
@@ -78,14 +71,20 @@ AbstractDesktopView::~AbstractDesktopView()
         delete d->mViewportHost;
 }
 
-ViewportHost *AbstractDesktopView::viewportHost() const
+StringList AbstractDesktopView::hostsViewports() const
+{
+    return StringList();
+}
+
+ViewportHost *AbstractDesktopView::viewportHost(const String &hostName) const
 {
     return d->mViewportHost;
 }
 
+/*
 void AbstractDesktopView::enableOpenGL(bool state)
 {
-    /*
+
     if (state) {
         setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
         setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
@@ -97,12 +96,13 @@ void AbstractDesktopView::enableOpenGL(bool state)
         setOptimizationFlags(QGraphicsView::DontSavePainterState);
         setOptimizationFlag(QGraphicsView::DontClipPainter);
         setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    }*/
+    }
 }
+*/
 
-void AbstractDesktopView::showLayer(const QString &layer)
+FloatRect AbstractDesktopView::desktopGeometry() const
 {
-    Q_UNUSED(layer);
+    return FloatRect();
 }
 
 }

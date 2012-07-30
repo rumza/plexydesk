@@ -45,9 +45,10 @@ void  DesktopViewPluginImpl::setRect(const QRect &rect)
 {
 }
 
-PlexyDesk::AbstractDesktopView  *DesktopViewPluginImpl::view(QGraphicsScene *scene)
+ViewportHost *DesktopViewPluginImpl::view(QGraphicsScene *scene)
 {
-    DesktopView *view = new DesktopView(scene);
+    DesktopView *view = new DesktopView();
+    view->setScene(scene);
     view->addWallpaperItem();
     view->setThemePack(PlexyDesk::Config::getInstance()->themepackName());
     view->registerPhotoDialog();
