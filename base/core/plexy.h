@@ -62,10 +62,37 @@
 
 #define __SYSTEM_HAVE_GCC_VISIBILITY
 
+/*
 #if defined(plexydeskcore_EXPORTS)
   #define  PLEXYDESK_EXPORT Q_DECL_EXPORT
 #else
   #define  PLEXYDESK_EXPORT Q_DECL_IMPORT
+#endif
+*/
+
+#if defined _WIN32 || defined __CYGWIN__
+  #ifdef BUILDING_DLL
+    #ifdef __GNUC__
+      #define PLEXYDESK_EXPORT __attribute__ ((dllexport))
+    #else
+      #define PLEXYDESK_EXPORT __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
+    #endif
+  #else
+    #ifdef __GNUC__
+      #define PLEXYDESK_EXPORT __attribute__ ((dllimport))
+    #else
+      #define PLEXYDESK_EXPORT __declspec(dllimport) // Note: actually gcc seems to also supports this syntax.
+    #endif
+  #endif
+  #define PLEXYDESK_IMPORT
+#else
+  #if __GNUC__ >= 4
+    #define PLEXYDESK_EXPORT __attribute__ ((visibility ("default")))
+    #define PLEXYDESK_IMPORT  __attribute__ ((visibility ("hidden")))
+  #else
+    #define PLEXYDESK_EXPORT
+    #define PLEXYDESK_IMPORT
+  #endif
 #endif
 
 //TODO
