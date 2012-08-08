@@ -121,11 +121,11 @@ ENDIF (NOT MACOSX_BUILD)
 IF (MACOSX_BUILD)
 
 SET(sourceFiles
-               pluginloader.mm
+        pluginloader.mm
     )
 
 SET(headerFiles
-               pluginloader.h
+        pluginloader.h
    )
 
 SET(sourceFiles
@@ -141,7 +141,7 @@ FIND_LIBRARY(COCOA_LIBRARY Cocoa)
 MARK_AS_ADVANCED (COCOA_LIBRARY)
 SET(MAC_LIBS ${COCOA_LIBRARY})
 
-ADD_LIBRARY(${PLEXY_CORE_LIBRARY} SHARED ${sourceFiles} ${QT_MOC_SRCS})
+ADD_LIBRARY(${PLEXY_CORE_LIBRARY} MODULE ${sourceFiles} ${QT_MOC_SRCS})
 
 TARGET_LINK_LIBRARIES(${PLEXY_CORE_LIBRARY} ${libs} ${MAC_LIBS})
 
