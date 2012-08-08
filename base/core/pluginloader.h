@@ -27,7 +27,7 @@ namespace PlexyDesk
 class PLEXYDESK_EXPORT PluginLoader
 {
 public:
-    PluginLoader();
+    explicit PluginLoader();
     virtual ~PluginLoader();
 
     static PluginLoader *getInstanceWithPrefix(const String &desktopPrefix, const String &libPrefix);

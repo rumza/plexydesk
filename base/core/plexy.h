@@ -52,6 +52,8 @@
 #ifndef __APPLE__
 #include <QtCore/QtGlobal>
 #include <QGraphicsView>
+#else
+#import <Cocoa/Cocoa.h>
 #endif
 
 #ifdef Q_CC_MSVC
@@ -80,13 +82,13 @@
   #endif
   #define PLEXYDESK_IMPORT
 #else
-  #if __GNUC__ >= 4
+#if __GNUC__ >= 4
     #define PLEXYDESK_EXPORT __attribute__ ((visibility ("default")))
     #define PLEXYDESK_IMPORT  __attribute__ ((visibility ("hidden")))
-  #else
+#else
     #define PLEXYDESK_EXPORT
     #define PLEXYDESK_IMPORT
-  #endif
+#endif
 
 //TODO
 //add dllexport for windows
@@ -104,6 +106,14 @@ namespace PlexyDesk
     typedef QRectF FloatRect;
     typedef QStringList StringList;
 }
+#else
+namespace PlexyDesk
+{
+    typedef NSString *String;
+    typedef NSArray *StringList;
+    typedef NSRect FloatRect;
+    typedef NSView *viewportHost;
+}
 #endif
 
 #define  Q_UINT32 unsigned int
@@ -118,7 +128,6 @@ namespace PlexyDesk
     { \
         return new CLASSNAME; \
     }
-
-
+#endif
 
 #endif
