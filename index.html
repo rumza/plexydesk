@@ -1,131 +1,174 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
+<html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Plexydesk : A Qt Desktop customizer." />
 
-	<title>PlexyDesk @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #0d67c6;
-		font-family: "helvetica"; 
-  		color: #ffffff;
-	    }
-	    #container {
-	      margin: 0 auto;
-	      width: 700px;
-	    }
-		h1 { font-size: 3.8em; color: #f29839; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #f29839; }
-	    h3 { text-align: center; color: #f29839; }
-	    a { color: #f29839; }
-	    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-	    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-	    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-	    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-</head>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-<body>
-  <a href="https://github.com/plexydesk/plexydesk"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  
-  <div id="container">
+    <title>Plexydesk</title>
+  </head>
 
-    <div class="download">
-      <a href="http://github.com/plexydesk/plexydesk/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/plexydesk/plexydesk/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/plexydesk/plexydesk">View on GitHub</a>
+
+          <h1 id="project_title">Plexydesk</h1>
+          <h2 id="project_tagline">A Qt Desktop customizer.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/plexydesk/plexydesk/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/plexydesk/plexydesk/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
     </div>
-      
-    <h1><a href="http://github.com/plexydesk/plexydesk">PlexyDesk</a> 
-      <span class="small">by <a href="http://github.com/siraj">siraj</a></small></h1>
 
-    <div class="description">
-      A Qt based Customisable Desktop.
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>METHOD 1:</h2>
+
+<ol>
+<li>Go to a folder of your choice where you will build PlexyDesk.
+For example /tmp/plexy</li>
+<li>git clone <a href="mailto:git@github.com">git@github.com</a>:plexydesk/plexydesk.git</li>
+<li>cd plexydesk</li>
+</ol><h2>METHOD 2:</h2>
+
+<ol>
+<li>Go to a folder of your choice where you will build PlexyDesk.
+For example /tmp/plexy</li>
+<li>Get the source tarball from our download page - <a href="http://www.plexyplanet.org/download#source">http://www.plexyplanet.org/download#source</a>
+</li>
+<li>tar xjvf plexydesk-X.X.X.tar.bz2
+where X.X.X is the version number of PlexyDesk</li>
+<li>cd plexydesk-X.X.X
+where X.X.X is the version number of PlexyDesk</li>
+</ol><p>Both methods will lead you in the sources root folder.
+Next continue with building depending on what you are after.</p>
+
+<p>NOTE: Have in mind that the best way to install PlexyDesk is using your distribution
+      native package system. PlexyDesk now supports building packages for these
+      distributions (see howto do it below):
+      - Mandriva
+      - openSuSE
+      - Fedora
+      - PCLinuxOS*
+      - Ubuntu
+      - Debian and its derivatives</p>
+
+<p>PCLinuxOS support for building its native packages is dropped now (though the code
+that supports the rpm build will remain intact). At present PlexyDesk is known to
+build and work on the 2011.6 version of pclos.
+To find more info on the possible solutions you have, please visit our homepage:
+<a href="http://www.plexyplanet.org/pclos">http://www.plexyplanet.org/pclos</a></p>
+
+<h1>Building On Linux (debug mode):</h1>
+
+<p>This is valid for all distributions.
+From sources root folder do:</p>
+
+<p>mkdir build
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX:STRING=/usr -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_VERBOSE_MAKEFILE:BOOL=true -DCMAKE_CXX_FLAGS_DEBUG:STRING="-g -O0"
+make
+sudo make install</p>
+
+<h1>Building On Linux (release mode):</h1>
+
+<p>This is valid for all distributions.
+From sources root folder do:</p>
+
+<p>mkdir build
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install</p>
+
+<h1>Building a Debian/Ubuntu package on Linux:</h1>
+
+<p>This can be done if your distribution is a Debian derivative.
+From sources root folder do:</p>
+
+<p>dist/make_dist_deb.sh</p>
+
+<p>and follow the instructions.
+When the plexydesk_X.X.X_YYYY.deb is ready you may install it using the deb standard
+command:</p>
+
+<p>dpkg -i INSTALLERS/deb/plexydesk_X.X.X_YYYY.deb</p>
+
+<p>NOTE: If some of the dependencies are not satisfied, use your package manager to install
+them first and then do the "dpkg -i plexydesk_X.X.X_YYYY.deb" again.</p>
+
+<h1>Building an RPM package on Linux:</h1>
+
+<p>This can be done if your distribution is an RPM distribution. Currently PlexyDesk
+supports building RPMs for these distributions:</p>
+
+<ul>
+<li>Mandriva</li>
+<li>openSuSE</li>
+<li>Fedora</li>
+<li>Ubuntu</li>
+<li>Debian and its derivatives</li>
+</ul><p>If you know for sure that your distribution is an RPM one, but it is not in the above
+list, please try this method first and it may work due to the included support
+even of unknown RPM distros.</p>
+
+<p>First be sure you have already installed the rpm-build package.
+Next from sources root folder do:</p>
+
+<p>dist/make_dist_rpm.sh</p>
+
+<p>and follow the instructions.
+When the plexydesk-X.X.X-YYYYYYY.rpm is ready you may install it using the rpm standard
+command:</p>
+
+<p>rpm -ivp INSTALLERS/rpm/plexydesk-X.X.X-YYYYYYY.rpm</p>
+
+<p>NOTE: If some of the dependencies are not satisfied, use your package manager to install
+them first and then do the "rpm -ivp plexydesk-X.X.X-YYYYYYY.rpm" again.</p>
+
+<h1>Building On Windows:</h1>
+
+<p>Please follow the instructions on <a href="http://www.plexyplanet.org/win_build">http://www.plexyplanet.org/win_build</a></p>
+
+<h1>Debugging of PlexyDesk</h1>
+
+<p>If you need a debug output from PlexyDesk, you have two methods:</p>
+
+<h2>METHOD 1:</h2>
+
+<p>PlexyDesk if built in Debugging Mode, will create a log file in your temp folder
+(depending on your platform) that will be named plexydesk_log_DATE-TIME.txt
+You can see the output in this file.</p>
+
+<h2>METHOD 2:</h2>
+
+<p>You may debug PlexyDesk (only if built in Debugging Mode) by starting it in console
+(any platform) and using the environment variable: PLEXYDESK_CONSOLE_DEBUG.
+Set it to "enable", "true" or 1 (all are case insensitive). For Windows for example
+do it by issuing this command on the command line of your Command prompt:
+SET PLEXYDESK_CONSOLE_DEBUG=true### Support or Contact
+If you have feature requests or bugs about plexydesk please feel free to contact us from redmine.plexyplanet.org or use the github issue tracker to file issues.</p>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Plexydesk maintained by <a href="https://github.com/plexydesk">plexydesk</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
-    <br />
 
-    <p>PlexyDesk is a modular Desktop extension fully powered by Nokia Qt Framework.</p>
-	<p>PlexyDesk lets you customise your Desktop with QML and it's C++ API.</p>
-	<p>Apart from this, PlexyDesk also lets you make theme packs (Skins) for your desktop using QML and share it with everyone.</p>
-
-    <br />
-
-	<p>PlexyDesk Currently supports the following features:
-		<ul>
-			<li>Change your desktop wallpaper by dragging and dropping any image you like from your file manager.</li>
-			<li>Fully supports Qt QML</li>
-		    <li>Provides support for Qt/3D</li>
-		    <li>PlexyDesk widgets can be programmed with shader programs (GLSL).</li>
-		    <li>API for writing data models, and C++ widget plugins</li>
-		    <li>Dbus API for changing the wallpaper on Linux</li>
-		    <li>Various Utility widgets (like a Clock, File browser, and Photo Frame).</li>
-		</ul>
-	</p>
-
-    <br />
-
-	<p>PlexyDesk Depends on Qt 4.7 or above and we currently use the following Qt Modules:
-		<ul>
-			<li>QtCore - for File system access and plugin API</li>
-		    <li>QtGUI - we mostly use QGraphicsView</li>
-		    <li>QtOpenGL - to run PlexyDesk in hardware accelerated mode</li>
-		    <li>QtNetwork - for network access and data plugins</li>
-		    <li>QtSVG - for C++ widgets</li>
-		    <li>QtDeclarative - or QML support</li>
-		    <li>QtWebkit - to run Apple Widgets on Mac</li>
-		    <li>QtXML and QtXmlPatterns - for XML processing</li>
-		    <li>QtTest - for Test cases</li>
-		    <li>QtDBus - for interprocess communication needs</li>
-		</ul>
- 	</p>
- 
-    <br />
-
-	<h2>Dependencies</h2>
-	<p>Qt4</p>
-	
-    <br />
-
-	<h2>License</h2>
-	<p>LGPL3</p>
-	
-    <br />
-
-	<h2>Authors</h2>
-	<p>Plexydesk Team</p>
-	
-    <br />
-
-	<h2>Contact</h2>
-	<p>(siraj at kde.org)</p>
-	
-    <br />
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/plexydesk/plexydesk/zipball/master">zip</a> or
-      <a href="http://github.com/plexydesk/plexydesk/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
-      <pre>$ git clone git://github.com/plexydesk/plexydesk</pre>
-    </p>
-      
-    <div class="footer">
-      Get the source code on GitHub: <a href="http://github.com/plexydesk/plexydesk">plexydesk/plexydesk</a>
-    </div>
-    
-  </div>
-
-  
-</body>
+  </body>
 </html>

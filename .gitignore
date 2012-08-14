@@ -1,7 +1,0 @@
-# Ignore folders that are used for building the project
-build/
-
-# Ignore the INSTALLERS folder, used to store the prepared installers
-# for the Windows Platform
-INSTALLERS/
-
