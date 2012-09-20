@@ -56,6 +56,8 @@ void ClockWidget::preRenderClockImages()
     QSize clock_face_size (boundingRect().width(), boundingRect().height());
 
     mClockBackFace = svg->get(QLatin1String("clock#ClockFace"), clock_face_size);
+    mClockMinuteHand = svg->get(QLatin1String("clock#MinuteHand"), clock_face_size);
+    mClockSecondHand = svg->get(QLatin1String("clock#SecondHand"), clock_face_size);
 
     //TODO Gen pixmaps for clock hands and the clock screw.
 
