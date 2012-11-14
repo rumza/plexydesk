@@ -66,8 +66,6 @@ void NativeStyle::drawPushButton(const StyleFeatures &features, QPainter *painte
 }
 
 
-
-
 void NativeStyle::drawWindowButton(const StyleFeatures &features, QPainter *painter)
 {
     QRectF rect = features.exposeRect;
