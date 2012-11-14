@@ -25,4 +25,5 @@ private:
 };
 }
 
+
 #endif // NATIVESTYLE_H
