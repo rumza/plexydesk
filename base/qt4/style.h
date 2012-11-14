@@ -18,6 +18,7 @@
 *******************************************************************************/
 
 #ifndef STYLE_H
+
 #define STYLE_H
 
 #include <plexy.h>
@@ -53,6 +54,7 @@ public:
     //style enums
     typedef enum {
         CE_PushButton,
+        CE_WindowButton,
         CE_CheckBox,
         CE_Label,
         CE_ToolButton,
